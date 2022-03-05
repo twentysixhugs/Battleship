@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/twentysixhugs/Battleship#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.16.11",
     "@types/jest": "^27.4.1",
     "jest": "^27.5.1",
     "webpack": "^5.70.0",
