@@ -5,6 +5,13 @@ function ShipFactory(length) {
     return _positions[position];
   }
 
+  function isSunk() {
+    if (_positions.every(position => position.isHit)) {
+      return true;
+    }
+
+    return false;
+  }
 
   /* Hit one of ship's positions */
   function hit(position) {
@@ -13,6 +20,7 @@ function ShipFactory(length) {
 
   return {
     getPosition,
+    isSunk,
     hit,
   }
 }
