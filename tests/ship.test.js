@@ -7,13 +7,3 @@ test('ship hit is marked', () => {
   expect(ship.getPosition(2)).toHaveProperty('isHit', true);
 });
 
-test('ship is sunk when all positions are hit', () => {
-  const len = 4;
-  const ship = ShipFactory(len);
-
-  for (let i = 0; i < len; i++) {
-    ship.hit(i);
-  }
-
-  expect(ship.isSunk()).toBeTruthy();
-});
