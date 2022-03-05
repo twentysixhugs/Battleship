@@ -8,6 +8,7 @@ const config = {
     filename: 'bundle.js'
   },
   mode: 'development',
+  devtool: 'inline-source-map',
 };
 
 module.exports = config;
