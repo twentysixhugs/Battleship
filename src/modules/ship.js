@@ -1,7 +1,7 @@
 function ShipFactory(coordinates) {
   const _positions = _createPositions(coordinates.length);
 
-  this.coordinates = coordinates
+  this.coordinates = coordinates;
 
   this.getPosition = function (position) {
     return _positions[position];
