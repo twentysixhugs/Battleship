@@ -1,4 +1,4 @@
-import ShipFactory from '../src/modules/ship'
+import ShipFactory from '../src/modules/ship';
 
 test('ship hit is marked', () => {
   const ship = ShipFactory(4); // create a ship with length 4
