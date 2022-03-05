@@ -1,11 +1,11 @@
 function ShipFactory(length) {
   const _positions = _createPositions(length);
 
-  function getPosition(position) {
+  this.getPosition = function (position) {
     return _positions[position];
   }
 
-  function isSunk() {
+  this.isSunk = function () {
     if (_positions.every(position => position.isHit)) {
       return true;
     }
@@ -14,15 +14,10 @@ function ShipFactory(length) {
   }
 
   /* Hit one of ship's positions */
-  function hit(position) {
+  this.hit = function (position) {
     _positions[position].isHit = true;
   }
 
-  return {
-    getPosition,
-    isSunk,
-    hit,
-  }
 }
 
 export default ShipFactory;
