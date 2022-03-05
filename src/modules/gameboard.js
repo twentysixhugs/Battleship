@@ -1,4 +1,5 @@
 import ShipFactory from "./ship";
+import hitShip from "./manager";
 
 function GameboardFactory() {
   const _length = 10; // 10 x 10 board
@@ -12,17 +13,12 @@ function GameboardFactory() {
     for (ship of _ships) {
       for (shipCoordinate of ship.coordinates) {
         if (shipCoordinate === attackCoordinate) {
-          ship.hit(ship.coordinates.indexOf(shipCoordinate)); // hit the ship at this position (coordinate)
+          /* ship.hit(ship.coordinates.indexOf(shipCoordinate)); */ // hit the ship at this position (coordinate)
+          hitShip(ship, coordinate);
         }
       }
     }
   }
-
-  function _checkIfHit(checkedCoordinate) {
-
-    return false;
-  }
-
 }
 
 export default GameboardFactory;
