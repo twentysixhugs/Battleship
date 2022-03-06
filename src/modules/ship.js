@@ -32,8 +32,11 @@ function _createPositions(length) {
     }
   }
 
-  const positions = new Array(length);
-  positions.fill(new Position());
+  const positions = [];
+
+  for (let i = 0; i < length; i++) {
+    positions.push(new Position());
+  }
 
   return positions;
 }
