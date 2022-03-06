@@ -7,7 +7,7 @@ describe('attack receiving and handling', () => {
     const gameboard = new GameboardFactory();
 
     const ship = new ShipFactory(['F1', 'F2', 'F3', 'F4']);
-    gameboard.placeShip(ship);
+    gameboard.placeShips(ship);
 
     const attackCoordinate = 'F2';
     gameboard.receiveAttack(attackCoordinate);
@@ -19,12 +19,31 @@ describe('attack receiving and handling', () => {
     const gameboard = new GameboardFactory();
 
     const ship = new ShipFactory(['F1', 'F2', 'F3', 'F4']);
-    gameboard.placeShip(ship);
+    gameboard.placeShips(ship);
 
     const attackCoordinate = 'F2';
     gameboard.receiveAttack(attackCoordinate);
 
     expect(ship.getPosition(2)).toHaveProperty('isHit', false);
-  })
+  });
+});
+
+describe('ships storing', () => {
+  test('multiple ships are saved and can be accessed', () => {
+    const gameboard = new GameboardFactory();
+    const ships = [
+      new ShipFactory(['F1', 'F2', 'F3', 'F4']),
+      new ShipFactory(['A2', 'A3']),
+      new ShipFactory(['B3'])
+    ]
+
+    gameboard.placeShips(...ships);
+
+    expect(gameboard.getShips()).toEqual(ships);
+  });
+
+  // test('works when adding one ship only', () => {
+
+  // })
 });
 
