@@ -8,6 +8,10 @@ function GameboardFactory() {
     _ships.push(ship);
   }
 
+  this.getShips = function () {
+    return [..._ships];
+  }
+
   this.receiveAttack = function (attackCoordinate) {
     for (const ship of _ships) {
       for (const shipCoordinate of ship.coordinates) {
