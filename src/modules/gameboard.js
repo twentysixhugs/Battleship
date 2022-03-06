@@ -1,5 +1,4 @@
-import ShipFactory from "./ship";
-import hitShip from "./manager";
+import { hitShip } from "./manager";
 
 function GameboardFactory() {
   const _length = 10; // 10 x 10 board
@@ -10,11 +9,10 @@ function GameboardFactory() {
   }
 
   this.receiveAttack = function (attackCoordinate) {
-    for (ship of _ships) {
-      for (shipCoordinate of ship.coordinates) {
+    for (const ship of _ships) {
+      for (const shipCoordinate of ship.coordinates) {
         if (shipCoordinate === attackCoordinate) {
-          /* ship.hit(ship.coordinates.indexOf(shipCoordinate)); */ // hit the ship at this position (coordinate)
-          hitShip(ship, coordinate);
+          hitShip(ship, ship.coordinates.indexOf(shipCoordinate)); // hit the ship at this position
         }
       }
     }
