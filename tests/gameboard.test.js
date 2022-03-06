@@ -76,3 +76,38 @@ describe('ships storing and accessing', () => {
     expect(obtainedShips).not.toEqual(gameboard.getShips());
   })
 });
+
+describe('missed attacks handling', () => {
+  test('missed attack is caught and stored', () => {
+    const gameboard = new GameboardFactory();
+    const ships = [
+      new ShipFactory('F1', 'F2'),
+      new ShipFactory('F3', 'F4'),
+      new ShipFactory('A5', 'A6', 'A7')
+    ];
+
+    gameboard.placeShips(...ships);
+
+    // hit where there's no ship
+    gameboard.receiveAttack('B8');
+    gameboard.receiveAttack('B7');
+
+    expect(gameboard.getMissedAttacks()).toEqual(['B8', 'B7'])
+  })
+
+  test('no duplicate coordinates', () => {
+    const gameboard = new GameboardFactory();
+    const ships = [
+      new ShipFactory('F1', 'F2'),
+      new ShipFactory('F3', 'F4'),
+      new ShipFactory('A5', 'A6', 'A7')
+    ];
+
+    gameboard.placeShips(...ships);
+
+    gameboard.receiveAttack('B8');
+    gameboard.receiveAttack('B8');
+
+    expect(gameboard.getMissedAttacks()).toEqual(['B8'])
+  })
+});
