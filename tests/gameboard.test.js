@@ -42,8 +42,28 @@ describe('ships storing', () => {
     expect(gameboard.getShips()).toEqual(ships);
   });
 
-  // test('works when adding one ship only', () => {
+  test('a single ship is added and can be accessed', () => {
+    const gameboard = new GameboardFactory();
+    const ship = new ShipFactory('F1', 'F2');
 
-  // })
+    gameboard.placeShips(ship);
+
+    expect(gameboard.getShips()).toEqual([ship])
+  });
+
+  test('ships can be added once again', () => {
+    const gameboard = new GameboardFactory();
+    const ships = [
+      new ShipFactory('F1', 'F2'),
+      new ShipFactory('F3', 'F4'),
+      new ShipFactory('A5', 'A6', 'A7')
+    ];
+
+    gameboard.placeShips(ships[0], ships[1]);
+
+    gameboard.placeShips(ships[2]);
+
+    expect(gameboard.getShips()).toEqual(ships);
+  });
 });
 
