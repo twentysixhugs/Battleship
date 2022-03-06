@@ -27,6 +27,10 @@ function GameboardFactory() {
     _ships.push(ship);
   }
 
+  this.areAllShipsSunk = function () {
+    return _ships.every(ship => ship.isSunk);
+  }
+
 
   this.receiveAttack = function (attackCoordinate) {
     const attackCoordinateStr = attackCoordinate.toString();
