@@ -3,10 +3,6 @@ function hitShip(ship, position) {
   // TODO: hit in DOM
 }
 
-function getGameboardDimensionLength() {
-
-}
-
 export {
   hitShip,
   getGameboardDimensionLength
