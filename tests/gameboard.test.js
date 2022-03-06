@@ -6,7 +6,7 @@ describe('attack receiving and handling', () => {
   test('hits the ship cell when attacked', () => {
     const gameboard = new GameboardFactory();
 
-    const ship = new ShipFactory(['F1', 'F2', 'F3', 'F4']);
+    const ship = new ShipFactory('F1', 'F2', 'F3', 'F4');
     gameboard.placeShips(ship);
 
     const attackCoordinate = 'F2';
@@ -18,7 +18,7 @@ describe('attack receiving and handling', () => {
   test('not attacked cells are not affected', () => {
     const gameboard = new GameboardFactory();
 
-    const ship = new ShipFactory(['F1', 'F2', 'F3', 'F4']);
+    const ship = new ShipFactory('F1', 'F2', 'F3', 'F4');
     gameboard.placeShips(ship);
 
     const attackCoordinate = 'F2';
@@ -32,9 +32,9 @@ describe('ships storing', () => {
   test('multiple ships are saved and can be accessed', () => {
     const gameboard = new GameboardFactory();
     const ships = [
-      new ShipFactory(['F1', 'F2', 'F3', 'F4']),
-      new ShipFactory(['A2', 'A3']),
-      new ShipFactory(['B3'])
+      new ShipFactory('F1', 'F2', 'F3', 'F4'),
+      new ShipFactory('A2', 'A3'),
+      new ShipFactory('B3')
     ]
 
     gameboard.placeShips(...ships);
