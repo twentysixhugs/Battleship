@@ -4,6 +4,5 @@ function hitShip(ship, position) {
 }
 
 export {
-  hitShip,
-  getGameboardDimensionLength
+  hitShip
 }
