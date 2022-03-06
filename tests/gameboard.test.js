@@ -28,7 +28,7 @@ describe('attack receiving and handling', () => {
   });
 });
 
-describe('ships storing', () => {
+describe('ships storing and accessing', () => {
   test('multiple ships are saved and can be accessed', () => {
     const gameboard = new GameboardFactory();
     const ships = [
@@ -65,5 +65,14 @@ describe('ships storing', () => {
 
     expect(gameboard.getShips()).toEqual(ships);
   });
-});
 
+  test('array of ships cannot be modified', () => {
+    const gameboard = new GameboardFactory();
+    gameboard.placeShips(new ShipFactory('F1', 'F2'));
+
+    const obtainedShips = gameboard.getShips();
+    obtainedShips[0] = 'not a ship';
+
+    expect(obtainedShips).not.toEqual(gameboard.getShips());
+  })
+});
