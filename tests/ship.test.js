@@ -1,7 +1,7 @@
 import ShipFactory from '../src/modules/ship';
 
 test('ship hit is marked', () => {
-  const coordinates = ['F1', 'F2', 'F3', 'F4'];
+  const coordinates = [[6, 1], [6, 2], [6, 3], [6, 4]];
   const ship = new ShipFactory(...coordinates); // create a ship with length 4
 
   ship.hit(2); // hit the third position
@@ -10,14 +10,14 @@ test('ship hit is marked', () => {
 });
 
 test('creates an extended ship that has coordinates', () => {
-  const coordinates = ['F1', 'F2', 'F3', 'F4'];
+  const coordinates = [[6, 1], [6, 2], [6, 3], [6, 4]];
   const ship = new ShipFactory(...coordinates); // create a ship with length 4
 
   expect(ship.getCoordinates()).toEqual(coordinates);
 });
 
 test('ship is sunk when all positions are hit', () => {
-  const coordinates = ['F1', 'F2', 'F3', 'F4'];
+  const coordinates = [[6, 1], [6, 2], [6, 3], [6, 4]];
   const ship = new ShipFactory(...coordinates);
 
   for (let i = 0; i < coordinates.length; i++) {
