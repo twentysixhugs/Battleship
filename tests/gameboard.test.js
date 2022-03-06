@@ -75,11 +75,6 @@ describe('ships storing and accessing', () => {
     expect(obtainedShips).not.toEqual(gameboard.getShips());
   })
 
-  // test('cannot place a ship near other ships', () => {
-  //   const gameboard = new GameboardFactory();
-  //   gameboard.placeShips(new ShipFactory([6, 1], [6, 2]));
-  //   expect(gameboard.placeShips(new ShipFactory([10, 1], [10, 2]))).toBeFalsy;
-  // })
 });
 
 describe('missed attacks handling', () => {
@@ -100,7 +95,7 @@ describe('missed attacks handling', () => {
     expect(gameboard.getMissedAttacks()).toEqual([[2, 8], [2, 7]])
   });
 
-  test.only('no duplicate coordinates', () => {
+  test('no duplicate coordinates', () => {
     const gameboard = new GameboardFactory();
     const ships = [
       new ShipFactory([6, 1], [6, 2]),
