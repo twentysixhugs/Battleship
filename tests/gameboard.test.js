@@ -97,11 +97,56 @@ describe('missed attacks handling', () => {
   });
 });
 
-// describe('report whether or not all ships have been sunk.', () => {
-//   test('reports that all ships are sunk', () => {
-//     const gameboard
-//   })
+describe('report whether or not all ships have been sunk.', () => {
+  test('reports that all ships are sunk', () => {
+    const gameboard = new GameboardFactory();
+    const ships = [
+      new ShipFactory([5, 3], [6, 3], [7, 3]),
+      new ShipFactory([5, 5], [6, 5], [7, 5]),
+    ]
 
-//   // test('reports that not all ships are sunk')
-// });
+    ships.forEach(ship => {
+      gameboard.placeShip(ship);
+      ship.hit(0);
+      ship.hit(1);
+      ship.hit(2);
+    });
+
+    expect(gameboard.areAllShipsSunk()).toBeTruthy;
+  })
+
+  test('returns true if not all ships are sunk', () => {
+    const gameboard = new GameboardFactory();
+    const ships = [
+      new ShipFactory([5, 3], [6, 3], [7, 3]),
+      new ShipFactory([5, 5], [6, 5], [7, 5]),
+    ]
+
+    ships.forEach(ship => {
+      gameboard.placeShip(ship);
+    });
+
+    ships[0].hit(0);
+    ships[0].hit(1);
+    ships[0].hit(2);
+
+    expect(gameboard.areAllShipsSunk()).toBeFalsy;
+  })
+
+  test('returns true if no ships are sunk', () => {
+    const gameboard = new GameboardFactory();
+    const ships = [
+      new ShipFactory([5, 3], [6, 3], [7, 3]),
+      new ShipFactory([5, 5], [6, 5], [7, 5]),
+    ]
+
+    ships.forEach(ship => {
+      gameboard.placeShip(ship);
+    });
+
+    expect(gameboard.areAllShipsSunk()).toBeFalsy;
+  })
+
+  // test('reports that not all ships are sunk')
+});
 
