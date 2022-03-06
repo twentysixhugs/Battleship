@@ -5,12 +5,8 @@ function GameboardFactory() {
   const _ships = [];
   const _missedAttacks = [];
 
-  function _placeMissedAttack(attackCoordinate) {
-    _missedAttacks.push(attackCoordinate);
-  }
-
-  this.placeShips = function (...receivedShips) {
-    _ships.push(...receivedShips);
+  this.getLength = function () {
+    return _length;
   }
 
   this.getShips = function () {
@@ -20,6 +16,16 @@ function GameboardFactory() {
   this.getMissedAttacks = function () {
     return [..._missedAttacks];
   }
+
+
+  function _placeMissedAttack(attackCoordinate) {
+    _missedAttacks.push(attackCoordinate);
+  }
+
+  this.placeShips = function (...receivedShips) {
+    _ships.push(...receivedShips);
+  }
+
 
   this.receiveAttack = function (attackCoordinate) {
     for (const ship of _ships) {
