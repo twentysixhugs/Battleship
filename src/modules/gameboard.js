@@ -1,5 +1,6 @@
 import { hitShip } from "./manager";
 
+
 function GameboardFactory() {
   const _length = 10; // 10 x 10 board
   const _ships = [];
@@ -22,24 +23,8 @@ function GameboardFactory() {
     _missedAttacks.push(attackCoordinate);
   }
 
-  function _validateShipCoordinates(ship) {
-    // аски значение?
-
-  }
-
-  function _addForbiddenCoordinates(ship) {
-    const shipCoordinates = ship.getCoordinates();
-
-    shipCoordinates.forEach(_getForbiddenCoordinates);
-  }
-
-  function _getForbiddenCoordinates(coordinate) {
-
-  }
-
-  this.placeShips = function (...receivedShips) {
-    // if can push return true else return false
-    _ships.push(...receivedShips);
+  this.placeShip = function (ship) {
+    _ships.push(ship);
   }
 
 
