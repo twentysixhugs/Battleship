@@ -1,8 +1,8 @@
-function validateShipPlacement(ship, ships) {
-  const shipCells = ship.getCoordinates();
-  const forbiddenCells = getForbiddenCoordinates(ships).map(cell => cell.toString());
+function validateShipPlacement(validatedShip, ships) {
+  const shipCells = stringifyElements(validatedShip.getCoordinates());
+  const forbiddenCoordinates = getForbiddenCoordinates(ships);
 
-  if (shipCells.some(cell => forbiddenCells.includes(cell.toString()))) {
+  if (shipCells.some(cell => forbiddenCoordinates.includes(cell))) {
     return false;
   }
 
@@ -14,44 +14,48 @@ export default validateShipPlacement;
 
 function getForbiddenCoordinates(ships) {
   const forbiddenCoordinates = ships
-    .map(ship => getShipSurrounding(ship))
+    .map(ship => {
+      const shipCoordinates = stringifyElements(ship.getCoordinates());
+      return getCellsSurroundingShip(shipCoordinates);
+    })
     .flat();
 
   return forbiddenCoordinates;
 }
 
-function getShipSurrounding(ship) {
-  const shipCoordinates = ship.getCoordinates();
-  const shipCoordinatesStr = shipCoordinates.map(coordinate => coordinate.toString())
-
-  const shipSurrounding = shipCoordinates
-    .map(getCellSurrounding)
+function getCellsSurroundingShip(shipCoordinates) {
+  const cellsSurroundingShip = shipCoordinates
+    .map(getCellsSurroundingCell)
     .flat()
 
-  return shipSurrounding;
+  return cellsSurroundingShip;
 }
 
-function getCellSurrounding(coordinate) {
-  // It may return negative coordinates that are not on board,
+function getCellsSurroundingCell(cell) {
+  // It may return negative cells that are not on board,
   // but it doesn't matter since they are not used at all
-  // and all we need to check is whether we can place a ship on
-  // an existing coordinate or not
+  // All we need to check is whether we can place a ship on
+  // an existing cell or not
   return [
-    // return everything around this coordinate
+    // return everything around this cell
 
     // above
-    [coordinate[0] - 1, coordinate[0] - 1],
-    [coordinate[0], coordinate[0] - 1],
-    [coordinate[0] + 1, coordinate[0] - 1],
+    [cell[0] - 1, cell[0] - 1],
+    [cell[0], cell[0] - 1],
+    [cell[0] + 1, cell[0] - 1],
 
     // right
-    [coordinate[0] + 1, coordinate[0]],
+    [cell[0] + 1, cell[0]],
     //left
-    [coordinate[0] - 1, coordinate[0]],
+    [cell[0] - 1, cell[0]],
 
     // below
-    [coordinate[0] - 1, coordinate[0] + 1],
-    [coordinate[0], coordinate[0] + 1],
-    [coordinate[0] + 1, coordinate[0] + 1],
+    [cell[0] - 1, cell[0] + 1],
+    [cell[0], cell[0] + 1],
+    [cell[0] + 1, cell[0] + 1],
   ]
+}
+
+function stringifyElements(arr) {
+  return arr.map(el => el.toString());
 }
