@@ -7,7 +7,7 @@ describe('attack receiving and handling', () => {
     const gameboard = new GameboardFactory();
 
     const ship = new ShipFactory([6, 1], [6, 2], [6, 3], [6, 4]);
-    gameboard.placeShips(ship);
+    gameboard.placeShip(ship);
 
     const attackCoordinate = [6, 2];
     gameboard.receiveAttack(attackCoordinate);
@@ -19,7 +19,7 @@ describe('attack receiving and handling', () => {
     const gameboard = new GameboardFactory();
 
     const ship = new ShipFactory([6, 1], [6, 2], [6, 3], [6, 4]);
-    gameboard.placeShips(ship);
+    gameboard.placeShip(ship);
 
     const attackCoordinate = [6, 2];
     gameboard.receiveAttack(attackCoordinate);
@@ -36,7 +36,7 @@ describe('ships storing and accessing', () => {
       new ShipFactory([1, 2], [1, 3]),
     ]
 
-    gameboard.placeShips(...ships);
+    ships.forEach(ship => gameboard.placeShip(ship));
 
     expect(gameboard.getShips()).toEqual(ships);
   });
@@ -45,29 +45,14 @@ describe('ships storing and accessing', () => {
     const gameboard = new GameboardFactory();
     const ship = new ShipFactory([6, 1], [6, 2]);
 
-    gameboard.placeShips(ship);
+    gameboard.placeShip(ship);
 
     expect(gameboard.getShips()).toEqual([ship])
   });
 
-  test('ships can be added once again', () => {
-    const gameboard = new GameboardFactory();
-    const ships = [
-      new ShipFactory([6, 1], [6, 2]),
-      new ShipFactory([8, 3], [8, 4]),
-      new ShipFactory([1, 1])
-    ];
-
-    gameboard.placeShips(ships[0], ships[1]);
-
-    gameboard.placeShips(ships[2]);
-
-    expect(gameboard.getShips()).toEqual(ships);
-  });
-
   test('array of ships cannot be modified', () => {
     const gameboard = new GameboardFactory();
-    gameboard.placeShips(new ShipFactory([6, 1], [6, 2]));
+    gameboard.placeShip(new ShipFactory([6, 1], [6, 2]));
 
     const obtainedShips = gameboard.getShips();
     obtainedShips[0] = 'not a ship';
@@ -86,7 +71,7 @@ describe('missed attacks handling', () => {
       new ShipFactory([1, 6], [1, 7], [1, 8])
     ];
 
-    gameboard.placeShips(...ships);
+    ships.forEach(ship => gameboard.placeShip(ship));
 
     // hit where there's no ship
     gameboard.receiveAttack([2, 8]);
@@ -103,7 +88,7 @@ describe('missed attacks handling', () => {
       new ShipFactory([1, 5], [1, 6], [1, 7])
     ];
 
-    gameboard.placeShips(...ships);
+    ships.forEach(ship => gameboard.placeShip(ship));
 
     gameboard.receiveAttack([2, 8]);
     gameboard.receiveAttack([2, 8]);
@@ -119,3 +104,4 @@ describe('missed attacks handling', () => {
 
 //   // test('reports that not all ships are sunk')
 // });
+
