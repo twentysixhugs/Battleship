@@ -1,4 +1,4 @@
-function ShipFactory(coordinates) {
+function ShipFactory(...coordinates) {
   const _positions = _createPositions(coordinates.length);
 
   this.coordinates = coordinates;
