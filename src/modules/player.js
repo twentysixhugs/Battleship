@@ -1,11 +1,11 @@
-import GameboardFactory from "./gameboard";
+import Gameboard from "./gameboard";
 
 class Player {
   #gameboard;
 
   constructor(name) {
     this.name = name;
-    this.#gameboard = new GameboardFactory();
+    this.#gameboard = new Gameboard();
   }
 
   get gameboard() {
@@ -30,6 +30,12 @@ class Player {
   static handleGameboardAttack(attacker, attacked, coordinates) {
     attacked.gameboard.receiveAttack(coordinates);
     Player.toggleCurrent(attacker, attacked);
+  }
+}
+
+class ComputerPlayer extends Player {
+  constructor() {
+    super('computer');
   }
 }
 
