@@ -26,6 +26,26 @@ describe('attack receiving and handling', () => {
 
     expect(ship.getPosition(2)).toHaveProperty('isHit', false);
   });
+
+  test('cannot attack the same ship cell once again', () => {
+    const gameboard = new GameboardFactory();
+
+    const ship = new ShipFactory([6, 1], [6, 2], [6, 3], [6, 4]);
+    gameboard.placeShip(ship);
+
+    const attackCoordinate = [6, 2];
+    expect(gameboard.receiveAttack(attackCoordinate)).toBeTruthy;
+    expect(gameboard.receiveAttack(attackCoordinate)).toBeFalsy;
+    expect(gameboard.getAllAttacks()).toEqual([[6, 2]]);
+  });
+
+  test('cannot attack the same empty cell once again', () => {
+    const gameboard = new GameboardFactory();
+    const attackCoordinate = [6, 2];
+    expect(gameboard.receiveAttack(attackCoordinate)).toBeTruthy;
+    expect(gameboard.receiveAttack(attackCoordinate)).toBeFalsy;
+    expect(gameboard.getAllAttacks()).toEqual([[6, 2]]);
+  })
 });
 
 describe('ships storing and accessing', () => {
