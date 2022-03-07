@@ -5,6 +5,7 @@ function GameboardFactory() {
   const _length = 10; // 10 x 10 board
   const _ships = [];
   const _missedAttacks = [];
+  const _attacks = [];
 
   this.getLength = function () {
     return _length;
@@ -18,9 +19,17 @@ function GameboardFactory() {
     return [..._missedAttacks];
   }
 
+  this.getAllAttacks = function () {
+    return [..._attacks];
+  }
+
 
   function _placeMissedAttack(attackCoordinate) {
     _missedAttacks.push(attackCoordinate);
+  }
+
+  function _placeAttack(attackCoordinate) {
+    _attacks.push(attackCoordinate);
   }
 
   this.placeShip = function (ship) {
@@ -33,23 +42,27 @@ function GameboardFactory() {
 
 
   this.receiveAttack = function (attackCoordinate) {
+    /* Check if it does not attack an already attacked coordinate */
     const attackCoordinateStr = attackCoordinate.toString();
+
+    for (const attack of _attacks) {
+      if (attack.toString() === attackCoordinateStr) {
+        return false;
+      }
+    }
+
+    _placeAttack(attackCoordinate);
+
     for (const ship of _ships) {
       for (const shipCoordinate of ship.getCoordinates()) {
         if (shipCoordinate.toString() === attackCoordinateStr) {
           hitShip(ship, ship.getCoordinates().indexOf(shipCoordinate)); // hit the ship at this position
-          return;
+          return true;
         }
       }
     }
-
-    for (const missedAttack of _missedAttacks) {
-      if (missedAttack.toString() === attackCoordinateStr) {
-        return;
-      }
-    }
-
     _placeMissedAttack(attackCoordinate);
+    return true;
   }
 }
 
