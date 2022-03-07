@@ -1,7 +1,7 @@
 import { hitShip } from "./manager";
 
 
-function GameboardFactory() {
+function Gameboard() {
   const _length = 10; // 10 x 10 board
   const _ships = [];
   const _missedAttacks = [];
@@ -40,6 +40,11 @@ function GameboardFactory() {
     return _ships.every(ship => ship.isSunk);
   }
 
+  this.isLastAttackSucessful = function () {
+    return _lastAttackSucessful;
+  }
+
+  let _lastAttackSucessful;
 
   this.receiveAttack = function (attackCoordinate) {
     /* Check if it does not attack an already attacked coordinate */
@@ -47,7 +52,8 @@ function GameboardFactory() {
 
     for (const attack of _attacks) {
       if (attack.toString() === attackCoordinateStr) {
-        return false;
+        _lastAttackSucessful = false;
+        return;
       }
     }
 
@@ -57,13 +63,16 @@ function GameboardFactory() {
       for (const shipCoordinate of ship.getCoordinates()) {
         if (shipCoordinate.toString() === attackCoordinateStr) {
           hitShip(ship, ship.getCoordinates().indexOf(shipCoordinate)); // hit the ship at this position
-          return true;
+          _lastAttackSucessful = true;
+          return;
         }
       }
     }
+
     _placeMissedAttack(attackCoordinate);
-    return true;
+    _lastAttackSucessful = true;
+    return;
   }
 }
 
-export default GameboardFactory;
+export default Gameboard;

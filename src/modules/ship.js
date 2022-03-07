@@ -1,4 +1,4 @@
-function ShipFactory(...coordinates) {
+function Ship(...coordinates) {
   const _positions = _createPositions(coordinates.length);
 
   const _coordinates = coordinates;
@@ -26,7 +26,7 @@ function ShipFactory(...coordinates) {
 
 }
 
-export default ShipFactory;
+export default Ship;
 
 
 function _createPositions(length) {

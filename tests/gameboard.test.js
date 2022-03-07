@@ -1,10 +1,10 @@
-import GameboardFactory from '../src/modules/gameboard';
+import Gameboard from '../src/modules/gameboard';
 import ShipFactory from '../src/modules/ship';
 
 
 describe('attack receiving and handling', () => {
   test('hits the ship cell when attacked', () => {
-    const gameboard = new GameboardFactory();
+    const gameboard = new Gameboard();
 
     const ship = new ShipFactory([6, 1], [6, 2], [6, 3], [6, 4]);
     gameboard.placeShip(ship);
@@ -16,7 +16,7 @@ describe('attack receiving and handling', () => {
   });
 
   test('not attacked cells are not affected', () => {
-    const gameboard = new GameboardFactory();
+    const gameboard = new Gameboard();
 
     const ship = new ShipFactory([6, 1], [6, 2], [6, 3], [6, 4]);
     gameboard.placeShip(ship);
@@ -28,29 +28,33 @@ describe('attack receiving and handling', () => {
   });
 
   test('cannot attack the same ship cell once again', () => {
-    const gameboard = new GameboardFactory();
+    const gameboard = new Gameboard();
 
     const ship = new ShipFactory([6, 1], [6, 2], [6, 3], [6, 4]);
     gameboard.placeShip(ship);
 
     const attackCoordinate = [6, 2];
-    expect(gameboard.receiveAttack(attackCoordinate)).toBeTruthy;
-    expect(gameboard.receiveAttack(attackCoordinate)).toBeFalsy;
+    gameboard.receiveAttack(attackCoordinate);
+    gameboard.receiveAttack(attackCoordinate);
+    expect(gameboard.isLastAttackSucessful()).toBeTruthy;
+    expect(gameboard.isLastAttackSucessful()).toBeFalsy;
     expect(gameboard.getAllAttacks()).toEqual([[6, 2]]);
   });
 
   test('cannot attack the same empty cell once again', () => {
-    const gameboard = new GameboardFactory();
+    const gameboard = new Gameboard();
     const attackCoordinate = [6, 2];
-    expect(gameboard.receiveAttack(attackCoordinate)).toBeTruthy;
-    expect(gameboard.receiveAttack(attackCoordinate)).toBeFalsy;
+    gameboard.receiveAttack(attackCoordinate)
+    gameboard.receiveAttack(attackCoordinate)
+    expect(gameboard.isLastAttackSucessful()).toBeTruthy;
+    expect(gameboard.isLastAttackSucessful()).toBeFalsy;
     expect(gameboard.getAllAttacks()).toEqual([[6, 2]]);
   })
 });
 
 describe('ships storing and accessing', () => {
   test('multiple ships are saved and can be accessed', () => {
-    const gameboard = new GameboardFactory();
+    const gameboard = new Gameboard();
     const ships = [
       new ShipFactory([6, 1], [6, 2], [6, 3], [6, 4]),
       new ShipFactory([1, 2], [1, 3]),
@@ -62,7 +66,7 @@ describe('ships storing and accessing', () => {
   });
 
   test('a single ship is added and can be accessed', () => {
-    const gameboard = new GameboardFactory();
+    const gameboard = new Gameboard();
     const ship = new ShipFactory([6, 1], [6, 2]);
 
     gameboard.placeShip(ship);
@@ -71,7 +75,7 @@ describe('ships storing and accessing', () => {
   });
 
   test('array of ships cannot be modified', () => {
-    const gameboard = new GameboardFactory();
+    const gameboard = new Gameboard();
     gameboard.placeShip(new ShipFactory([6, 1], [6, 2]));
 
     const obtainedShips = gameboard.getShips();
@@ -84,7 +88,7 @@ describe('ships storing and accessing', () => {
 
 describe('missed attacks handling', () => {
   test('missed attack is caught and stored', () => {
-    const gameboard = new GameboardFactory();
+    const gameboard = new Gameboard();
     const ships = [
       new ShipFactory([6, 1], [6, 2]),
       new ShipFactory([6, 3], [6, 4]),
@@ -101,7 +105,7 @@ describe('missed attacks handling', () => {
   });
 
   test('no duplicate coordinates', () => {
-    const gameboard = new GameboardFactory();
+    const gameboard = new Gameboard();
     const ships = [
       new ShipFactory([6, 1], [6, 2]),
       new ShipFactory([6, 3], [6, 4]),
@@ -119,7 +123,7 @@ describe('missed attacks handling', () => {
 
 describe('report whether or not all ships have been sunk.', () => {
   test('reports that all ships are sunk', () => {
-    const gameboard = new GameboardFactory();
+    const gameboard = new Gameboard();
     const ships = [
       new ShipFactory([5, 3], [6, 3], [7, 3]),
       new ShipFactory([5, 5], [6, 5], [7, 5]),
@@ -136,7 +140,7 @@ describe('report whether or not all ships have been sunk.', () => {
   })
 
   test('returns true if not all ships are sunk', () => {
-    const gameboard = new GameboardFactory();
+    const gameboard = new Gameboard();
     const ships = [
       new ShipFactory([5, 3], [6, 3], [7, 3]),
       new ShipFactory([5, 5], [6, 5], [7, 5]),
@@ -154,7 +158,7 @@ describe('report whether or not all ships have been sunk.', () => {
   })
 
   test('returns true if no ships are sunk', () => {
-    const gameboard = new GameboardFactory();
+    const gameboard = new Gameboard();
     const ships = [
       new ShipFactory([5, 3], [6, 3], [7, 3]),
       new ShipFactory([5, 5], [6, 5], [7, 5]),
