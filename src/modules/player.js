@@ -1,6 +1,18 @@
 import GameboardFactory from "./gameboard";
 
 class Player {
+  #gameboard;
+
+  constructor(name) {
+    this.name = name;
+    this.#gameboard = new GameboardFactory();
+  }
+
+  get gameboard() {
+    return this.#gameboard;
+  }
+
+
   static #current;
 
   static setCurrent(player) {
@@ -18,17 +30,6 @@ class Player {
   static handleGameboardAttack(attacker, attacked, coordinates) {
     attacked.gameboard.receiveAttack(coordinates);
     Player.toggleCurrent(attacker, attacked);
-  }
-
-  #gameboard;
-
-  constructor(name) {
-    this.name = name;
-    this.#gameboard = new GameboardFactory();
-  }
-
-  get gameboard() {
-    return this.#gameboard;
   }
 }
 
