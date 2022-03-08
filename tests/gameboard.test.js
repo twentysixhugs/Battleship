@@ -170,7 +170,7 @@ describe('missed attacks handling', () => {
 });
 
 describe('report whether or not all ships have been sunk.', () => {
-  test('reports that all ships are sunk', () => {
+  test('reports that all ships are sunk, returns true', () => {
     const gameboard = new Gameboard();
     const ships = [
       new Ship([5, 3], [6, 3], [7, 3]),
@@ -187,7 +187,7 @@ describe('report whether or not all ships have been sunk.', () => {
     expect(gameboard.areAllShipsSunk()).toBeTruthy();
   })
 
-  test('returns true if not all ships are sunk', () => {
+  test('returns false if not all ships are sunk', () => {
     const gameboard = new Gameboard();
     const ships = [
       new Ship([5, 3], [6, 3], [7, 3]),
@@ -205,7 +205,7 @@ describe('report whether or not all ships have been sunk.', () => {
     expect(gameboard.areAllShipsSunk()).toBeFalsy();
   })
 
-  test('returns true if no ships are sunk', () => {
+  test('returns false if no ships are sunk', () => {
     const gameboard = new Gameboard();
     const ships = [
       new Ship([5, 3], [6, 3], [7, 3]),
