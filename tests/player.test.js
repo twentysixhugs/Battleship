@@ -1,5 +1,5 @@
 import Player from '../src/modules/player';
-import ComputerPlayer from '../src/modules/player';
+import Computer from '../src/modules/player';
 import PlayerManager from '../src/modules/player_manager';
 
 test('Current player is changed after attack', () => {
