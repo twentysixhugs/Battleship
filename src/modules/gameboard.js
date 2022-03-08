@@ -28,6 +28,17 @@ function Gameboard() {
     return this.getAllCells().filter(cell => !stringifyElements(_attacks).includes(cell.toString()));
   }
 
+  this.getLastAttack = function () {
+    return _attacks[_attacks.length - 1];
+  }
+
+  this.lastAttackHitShip = function () {
+    const lastAttack = this.getLastAttack();
+    const checkResult = _ships.find(ship => stringifyElements(ship.getCoordinates()).includes(lastAttack.toString()));
+
+    return (checkResult) ? true : false;
+  }
+
   this.getAllCells = function () {
     const allCells = [];
 
