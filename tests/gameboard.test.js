@@ -92,6 +92,25 @@ describe('ships storing and accessing', () => {
     expect(obtainedShips).not.toEqual(gameboard.getShips());
   })
 
+  test('checks if last attack hit a ship', () => {
+    const gameboard = new Gameboard();
+    gameboard.placeShip(new Ship([6, 1], [6, 2]));
+
+    const attack = [6, 1];
+    gameboard.receiveAttack(attack);
+
+    expect(gameboard.lastAttackHitShip()).toBeTruthy;
+  })
+
+  test('checks if last attack did not hit a ship', () => {
+    const gameboard = new Gameboard();
+    gameboard.placeShip(new Ship([6, 1], [6, 2]));
+
+    const attack = [7, 2];
+    gameboard.receiveAttack(attack);
+
+    expect(gameboard.lastAttackHitShip()).toBeFalsy;
+  })
 });
 
 describe('missed attacks handling', () => {
