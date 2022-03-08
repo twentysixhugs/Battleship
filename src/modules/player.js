@@ -33,10 +33,5 @@ class Player {
   }
 }
 
-class ComputerPlayer extends Player {
-  constructor() {
-    super('computer');
-  }
-}
 
 export default Player;
