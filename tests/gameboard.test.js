@@ -90,9 +90,9 @@ describe('ships storing and accessing', () => {
     obtainedShips[0] = 'not a ship';
 
     expect(obtainedShips).not.toEqual(gameboard.getShips());
-  })
+  });
 
-  test('checks if last attack hit a ship', () => {
+  test('confirms that the last attack hit a ship', () => {
     const gameboard = new Gameboard();
     gameboard.placeShip(new Ship([6, 1], [6, 2]));
 
@@ -100,9 +100,9 @@ describe('ships storing and accessing', () => {
     gameboard.receiveAttack(attack);
 
     expect(gameboard.lastAttackHitShip()).toBeTruthy;
-  })
+  });
 
-  test('checks if last attack did not hit a ship', () => {
+  test('confirms that the last attack did not hit a ship', () => {
     const gameboard = new Gameboard();
     gameboard.placeShip(new Ship([6, 1], [6, 2]));
 
@@ -110,6 +110,27 @@ describe('ships storing and accessing', () => {
     gameboard.receiveAttack(attack);
 
     expect(gameboard.lastAttackHitShip()).toBeFalsy;
+  });
+
+  test('confirms that the last attack sank a ship', () => {
+    const gameboard = new Gameboard();
+    gameboard.placeShip(new Ship([6, 1], [6, 2], [6, 3]));
+
+    gameboard.receiveAttack([6, 1]);
+    gameboard.receiveAttack([6, 2]);
+    gameboard.receiveAttack([6, 3]);
+
+    expect(gameboard.lastAttackSankShip()).toBeTruthy;
+  });
+
+  test('confirms that the last attack did not sink a ship', () => {
+    const gameboard = new Gameboard();
+    gameboard.placeShip(new Ship([6, 1], [6, 2], [6, 3]));
+
+    gameboard.receiveAttack([6, 1]);
+    gameboard.receiveAttack([6, 3]);
+
+    expect(gameboard.lastAttackSankShip()).toBeFalsy;
   })
 });
 
