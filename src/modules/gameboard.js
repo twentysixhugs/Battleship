@@ -80,7 +80,7 @@ function Gameboard() {
   }
 
   this.areAllShipsSunk = function () {
-    return _ships.every(ship => ship.isSunk);
+    return _ships.every(ship => ship.isSunk());
   }
 
   this.isLastAttackSucessful = function () {
