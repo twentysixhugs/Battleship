@@ -2,7 +2,10 @@ import { getCellsSurroundingCell, stringifyElements } from './helper';
 
 function validateShipPlacement(validatedShip, ships) {
   const shipCells = stringifyElements(validatedShip.getCoordinates());
-  const forbiddenCoordinates = getForbiddenCoordinates(ships);
+  const forbiddenCoordinates = stringifyElements(getForbiddenCoordinates(ships));
+  ships.forEach(ship => {
+    forbiddenCoordinates.push(stringifyElements(ship.getCoordinates()));
+  });
 
   if (shipCells.some(cell => forbiddenCoordinates.includes(cell))) {
     return false;
