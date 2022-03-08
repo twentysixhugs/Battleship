@@ -1,8 +1,16 @@
 const PlayerManager = (() => {
   let _current;
+  let _players = [];
 
-  function _toggleCurrent(p1, p2) {
-    _current = (_current === p1) ? p2 : p1;
+  function addPlayer(player) {
+    if (_players.length === 2) {
+      players = []; // no more than two players are stored
+    }
+    _players.push(player);
+  }
+
+  function _toggleCurrent() {
+    _current = (_current === _players[0]) ? _players[1] : _players[0];
   }
 
   function setCurrent(player) {
@@ -11,6 +19,10 @@ const PlayerManager = (() => {
 
   function getCurrent() {
     return _current;
+  }
+
+  function getPlayerPossibleAttacks(player) {
+    return _players.find(_player => _player === player).gameboard.getPossibleAttacks();
   }
 
   function handleGameboardAttack(attacker, attacked, coordinates) {
@@ -22,6 +34,8 @@ const PlayerManager = (() => {
     setCurrent,
     getCurrent,
     handleGameboardAttack,
+    addPlayer,
+    getPlayerPossibleAttacks
   }
 })();
 
