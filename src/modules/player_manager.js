@@ -1,4 +1,4 @@
-const playerManager = (() => {
+const PlayerManager = (() => {
   let _current;
 
   function _toggleCurrent(p1, p2) {
@@ -24,3 +24,5 @@ const playerManager = (() => {
     handleGameboardAttack,
   }
 })();
+
+export default PlayerManager;
