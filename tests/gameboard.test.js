@@ -35,9 +35,9 @@ describe('attack receiving and handling', () => {
 
     const attackCoordinate = [6, 2];
     gameboard.receiveAttack(attackCoordinate);
+    expect(gameboard.isLastAttackSucessful()).toBeTruthy();
     gameboard.receiveAttack(attackCoordinate);
-    expect(gameboard.isLastAttackSucessful()).toBeTruthy;
-    expect(gameboard.isLastAttackSucessful()).toBeFalsy;
+    expect(gameboard.isLastAttackSucessful()).toBeFalsy();
     expect(gameboard.getAllAttacks()).toEqual([[6, 2]]);
   });
 
@@ -45,9 +45,9 @@ describe('attack receiving and handling', () => {
     const gameboard = new Gameboard();
     const attackCoordinate = [6, 2];
     gameboard.receiveAttack(attackCoordinate)
+    expect(gameboard.isLastAttackSucessful()).toBeTruthy();
     gameboard.receiveAttack(attackCoordinate)
-    expect(gameboard.isLastAttackSucessful()).toBeTruthy;
-    expect(gameboard.isLastAttackSucessful()).toBeFalsy;
+    expect(gameboard.isLastAttackSucessful()).toBeFalsy();
     expect(gameboard.getAllAttacks()).toEqual([[6, 2]]);
   })
 
@@ -99,7 +99,7 @@ describe('ships storing and accessing', () => {
     const attack = [6, 1];
     gameboard.receiveAttack(attack);
 
-    expect(gameboard.lastAttackHitShip()).toBeTruthy;
+    expect(gameboard.lastAttackHitShip()).toBeTruthy();
   });
 
   test('confirms that the last attack did not hit a ship', () => {
@@ -109,7 +109,7 @@ describe('ships storing and accessing', () => {
     const attack = [7, 2];
     gameboard.receiveAttack(attack);
 
-    expect(gameboard.lastAttackHitShip()).toBeFalsy;
+    expect(gameboard.lastAttackHitShip()).toBeFalsy();
   });
 
   test('confirms that the last attack sank a ship', () => {
@@ -120,7 +120,7 @@ describe('ships storing and accessing', () => {
     gameboard.receiveAttack([6, 2]);
     gameboard.receiveAttack([6, 3]);
 
-    expect(gameboard.lastAttackSankShip()).toBeTruthy;
+    expect(gameboard.lastAttackSankShip()).toBeTruthy();
   });
 
   test('confirms that the last attack did not sink a ship', () => {
@@ -130,7 +130,7 @@ describe('ships storing and accessing', () => {
     gameboard.receiveAttack([6, 1]);
     gameboard.receiveAttack([6, 3]);
 
-    expect(gameboard.lastAttackSankShip()).toBeFalsy;
+    expect(gameboard.lastAttackSankShip()).toBeFalsy();
   })
 });
 
@@ -184,7 +184,7 @@ describe('report whether or not all ships have been sunk.', () => {
       ship.hit(2);
     });
 
-    expect(gameboard.areAllShipsSunk()).toBeTruthy;
+    expect(gameboard.areAllShipsSunk()).toBeTruthy();
   })
 
   test('returns true if not all ships are sunk', () => {
@@ -202,7 +202,7 @@ describe('report whether or not all ships have been sunk.', () => {
     ships[0].hit(1);
     ships[0].hit(2);
 
-    expect(gameboard.areAllShipsSunk()).toBeFalsy;
+    expect(gameboard.areAllShipsSunk()).toBeFalsy();
   })
 
   test('returns true if no ships are sunk', () => {
@@ -216,7 +216,7 @@ describe('report whether or not all ships have been sunk.', () => {
       gameboard.placeShip(ship);
     });
 
-    expect(gameboard.areAllShipsSunk()).toBeFalsy;
+    expect(gameboard.areAllShipsSunk()).toBeFalsy();
   })
 
   // test('reports that not all ships are sunk')
