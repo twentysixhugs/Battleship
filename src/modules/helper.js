@@ -23,11 +23,28 @@ function getCellsSurroundingCell(cell) {
   ]
 }
 
+function getPerpendicularCells(cell) {
+  return [
+    // above
+    [cell[0], cell[0] - 1],
+
+    // right
+    [cell[0] + 1, cell[0]],
+
+    //left
+    [cell[0] - 1, cell[0]],
+
+    // below
+    [cell[0], cell[0] + 1],
+  ]
+}
+
 function stringifyElements(arr) {
   return arr.map(el => el.toString());
 }
 
 export {
   getCellsSurroundingCell,
+  getPerpendicularCells,
   stringifyElements
 };
