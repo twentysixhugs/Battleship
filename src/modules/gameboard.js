@@ -23,6 +23,22 @@ function Gameboard() {
     return [..._attacks];
   }
 
+  this.getPossibleAttacks = function () {
+    return this.getAllCells().filter(cell => !stringifyElements(_attacks).includes(cell.toString()));
+  }
+
+  this.getAllCells = function () {
+    const allCells = [];
+
+    for (let i = 1; i <= _length; i++) {
+      for (let j = 1; j <= _length; j++) {
+        allCells.push([i, j]);
+      }
+    }
+
+    return [...allCells];
+  }
+
 
   function _placeMissedAttack(attackCoordinate) {
     _missedAttacks.push(attackCoordinate);
@@ -30,6 +46,18 @@ function Gameboard() {
 
   function _placeAttack(attackCoordinate) {
     _attacks.push(attackCoordinate);
+  }
+
+  function _isAttackingAlreadyAttackedCell(attackCoordinateStr) {
+    for (const attack of _attacks) {
+      if (attack.toString() === attackCoordinateStr) {
+        return true;
+      }
+    }
+  }
+
+  function stringifyElements(arr) {
+    return arr.map(el => el.toString());
   }
 
   this.placeShip = function (ship) {
@@ -50,11 +78,9 @@ function Gameboard() {
     /* Check if it does not attack an already attacked coordinate */
     const attackCoordinateStr = attackCoordinate.toString();
 
-    for (const attack of _attacks) {
-      if (attack.toString() === attackCoordinateStr) {
-        _lastAttackSucessful = false;
-        return;
-      }
+    if (_isAttackingAlreadyAttackedCell(attackCoordinateStr)) {
+      _lastAttackSucessful = false;
+      return;
     }
 
     _placeAttack(attackCoordinate);
@@ -71,7 +97,6 @@ function Gameboard() {
 
     _placeMissedAttack(attackCoordinate);
     _lastAttackSucessful = true;
-    return;
   }
 }
 
