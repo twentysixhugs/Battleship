@@ -1,4 +1,5 @@
 import { hitShip } from "./manager";
+import { stringifyElements } from "./helper"
 
 
 function Gameboard() {
@@ -54,10 +55,6 @@ function Gameboard() {
         return true;
       }
     }
-  }
-
-  function stringifyElements(arr) {
-    return arr.map(el => el.toString());
   }
 
   this.placeShip = function (ship) {

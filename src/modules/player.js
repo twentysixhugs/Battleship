@@ -1,5 +1,6 @@
 import Gameboard from "./gameboard";
 import PlayerManager from "./player_manager";
+import { getCellsSurroundingCell } from "./helper";
 
 class Player {
   #gameboard;
@@ -22,6 +23,10 @@ class Computer extends Player {
   }
 
   makeMove() {
+    const possibleAttacks = PlayerManager.getPlayerPossibleAttacks(this);
+  }
+
+  findAdjacentCell() {
 
   }
 }
