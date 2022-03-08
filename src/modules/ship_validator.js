@@ -3,9 +3,7 @@ import { getCellsSurroundingCell, stringifyElements } from './helper';
 function validateShipPlacement(validatedShip, ships) {
   const shipCells = stringifyElements(validatedShip.getCoordinates());
   const forbiddenCoordinates = stringifyElements(getForbiddenCoordinates(ships));
-  ships.forEach(ship => {
-    forbiddenCoordinates.push(stringifyElements(ship.getCoordinates()));
-  });
+
 
   if (shipCells.some(cell => forbiddenCoordinates.includes(cell))) {
     return false;
@@ -24,6 +22,11 @@ function getForbiddenCoordinates(ships) {
       return getCellsSurroundingShip(shipCoordinates);
     })
     .flat();
+
+  ships.forEach(ship => {
+    const shipCoordinates = ship.getCoordinates();
+    shipCoordinates.forEach(coordinate => forbiddenCoordinates.push(stringifyElements(coordinate)));
+  });
 
   return forbiddenCoordinates;
 }
