@@ -4,13 +4,13 @@ const PlayerManager = (() => {
 
   function addPlayer(player) {
     if (_players.length === 2) {
-      players = []; // no more than two players are stored
+      _players = []; // no more than two players are stored
     }
     _players.push(player);
   }
 
   function _toggleCurrent() {
-    _current = (_current === _players[0]) ? _players[1] : _players[0];
+    _current = getNotCurrent();
   }
 
   function setCurrent(player) {
@@ -21,15 +21,22 @@ const PlayerManager = (() => {
     return _current;
   }
 
+  function getNotCurrent() {
+    return (_current === _players[0]) ? _players[1] : _players[0];
+  }
+
   function getPlayerPossibleAttacks(player) {
     // Finds the enemy player and gets the possible attacks from their gameboard
     return _players.find(_player => _player !== player).gameboard.getPossibleAttacks();
   }
 
   function handleGameboardAttack(coordinates) {
-    _toggleCurrent();
-    const nextPlayer = _current; // attack the gameboard of the player who will make next move
-    nextPlayer.gameboard.receiveAttack(coordinates);
+    const enemy = getNotCurrent();
+    enemy.gameboard.receiveAttack(coordinates);
+
+    if (!enemy.gameboard.lastAttackHitShip()) {
+      _toggleCurrent();
+    }
   }
 
   return {
