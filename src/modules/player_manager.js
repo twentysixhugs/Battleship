@@ -22,12 +22,14 @@ const PlayerManager = (() => {
   }
 
   function getPlayerPossibleAttacks(player) {
-    return _players.find(_player => _player === player).gameboard.getPossibleAttacks();
+    // Finds the enemy player and gets the possible attacks from their gameboard
+    return _players.find(_player => _player !== player).gameboard.getPossibleAttacks();
   }
 
-  function handleGameboardAttack(attacker, attacked, coordinates) {
-    attacked.gameboard.receiveAttack(coordinates);
-    _toggleCurrent(attacker, attacked);
+  function handleGameboardAttack(coordinates) {
+    _toggleCurrent();
+    const nextPlayer = _current; // attack the gameboard of the player who will make next move
+    nextPlayer.gameboard.receiveAttack(coordinates);
   }
 
   return {
