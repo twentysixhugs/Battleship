@@ -39,6 +39,13 @@ function Gameboard() {
     return (checkResult) ? true : false;
   }
 
+  this.lastAttackSankShip = function () {
+    const lastAttack = this.getLastAttack();
+    const lastShipHit = _ships.find(ship => stringifyElements(ship.getCoordinates()).includes(lastAttack.toString()));
+
+    return lastShipHit.isSunk();
+  }
+
   this.getAllCells = function () {
     const allCells = [];
 
