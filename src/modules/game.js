@@ -1,6 +1,6 @@
 import { Computer, Player } from "./player";
 import PlayerManager from "./player_manager";
-import Input from "./user_input";
+import Input from "./input";
 import Ship from "./ship";
 
 const Game = (() => {
