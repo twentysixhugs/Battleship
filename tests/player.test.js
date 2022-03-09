@@ -14,7 +14,7 @@ describe('Computer player', () => {
 
     player.gameboard.receiveAttack([2, 5]); // hit a ship
     computer.tryingToSinkShip = true;
-    computer.firstHitAtShip = [2, 5];
+    computer.lastHitAtShip = [2, 5];
     player.gameboard.receiveAttack([2, 4]); // sink it
     player.gameboard.receiveAttack([2, 3]);
     player.gameboard.receiveAttack([2, 2]);
@@ -22,7 +22,7 @@ describe('Computer player', () => {
     computer.defineNextMove();
 
     expect(computer.tryingToSinkShip).toBeFalsy();
-    expect(computer.firstHitAtShip).toBeFalsy();
+    expect(computer.lastHitAtShip).toBeFalsy();
   });
 
   test('Computer starts attacking a ship once it has hit one of ship\'s positions', () => {
@@ -37,7 +37,7 @@ describe('Computer player', () => {
     computer.defineNextMove();
 
     expect(computer.tryingToSinkShip).toBeTruthy();
-    expect(computer.firstHitAtShip).toBeTruthy();
+    expect(computer.lastHitAtShip).toBeTruthy();
   });
   test('When trying to sink a ship, computer does not attack the surrounding and same cells if they are already attacked', () => {
     const player = new Player('1');
@@ -49,7 +49,7 @@ describe('Computer player', () => {
 
     player.gameboard.receiveAttack([2, 5]); // hit a ship
     computer.tryingToSinkShip = true;
-    computer.firstHitAtShip = [2, 5];
+    computer.lastHitAtShip = [2, 5];
 
     player.gameboard.receiveAttack([2, 6]); // hit nearby empty cells
     player.gameboard.receiveAttack([1, 5]);
