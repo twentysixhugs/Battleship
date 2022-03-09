@@ -3,29 +3,6 @@ import { Computer } from '../src/modules/player';
 import PlayerManager from '../src/modules/player_manager';
 import Ship from '../src/modules/ship';
 
-describe('Human player', () => {
-  test('Current player is changed after attack NOT at ship', () => {
-    const player1 = new Player('1');
-    const player2 = new Player('2');
-
-    PlayerManager.setCurrent(player1);
-    PlayerManager.handleGameboardAttack([2, 5]);
-
-    expect(PlayerManager.getCurrent()).toBe(player2); // Check it's the same object
-  });
-
-  test('Current player is changed after attack at ship', () => {
-    const player1 = new Player('1');
-    const player2 = new Player('2');
-    player2.gameboard.placeShip(new Ship([2, 2], [2, 3], [2, 4], [2, 5]));
-
-    PlayerManager.setCurrent(player1);
-    PlayerManager.handleGameboardAttack([2, 5]);
-
-    expect(PlayerManager.getCurrent()).toBe(player1); // Check it's the same object
-  });
-});
-
 describe('Computer player', () => {
   test('computer stops attacking the ship once it is sunk', () => {
     const player = new Player('1');
