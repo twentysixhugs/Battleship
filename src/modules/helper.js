@@ -7,35 +7,35 @@ function getCellsSurroundingCell(cell) {
     // return everything around this cell
 
     // above
-    [cell[0] - 1, cell[0] - 1],
-    [cell[0], cell[0] - 1],
-    [cell[0] + 1, cell[0] - 1],
+    [cell[0] - 1, cell[1] - 1],
+    [cell[0], cell[1] - 1],
+    [cell[0] + 1, cell[1] - 1],
 
     // right
-    [cell[0] + 1, cell[0]],
+    [cell[0] + 1, cell[1]],
     //left
-    [cell[0] - 1, cell[0]],
+    [cell[0] - 1, cell[1]],
 
     // below
-    [cell[0] - 1, cell[0] + 1],
-    [cell[0], cell[0] + 1],
-    [cell[0] + 1, cell[0] + 1],
+    [cell[0] - 1, cell[1] + 1],
+    [cell[0], cell[1] + 1],
+    [cell[0] + 1, cell[1] + 1],
   ]
 }
 
 function getPerpendicularCells(cell) {
   return [
     // above
-    [cell[0], cell[0] - 1],
+    [cell[0], cell[1] - 1],
 
     // right
-    [cell[0] + 1, cell[0]],
+    [cell[0] + 1, cell[1]],
 
     //left
-    [cell[0] - 1, cell[0]],
+    [cell[0] - 1, cell[1]],
 
     // below
-    [cell[0], cell[0] + 1],
+    [cell[0], cell[1] + 1],
   ]
 }
 
