@@ -9,7 +9,7 @@ const PlayerManager = (() => {
     _players.push(player);
   }
 
-  function _toggleCurrent() {
+  function toggleCurrent() {
     _current = getNotCurrent();
   }
 
@@ -33,17 +33,13 @@ const PlayerManager = (() => {
   function handleGameboardAttack(coordinates) {
     const enemy = getNotCurrent();
     enemy.gameboard.receiveAttack(coordinates);
-
-    if (!enemy.gameboard.lastAttackHitShip()) {
-      _toggleCurrent();
-    }
   }
 
   return {
     setCurrent,
     getCurrent,
     getNotCurrent,
-    handleGameboardAttack,
+    toggleCurrent,
     addPlayer,
     getPlayerPossibleAttacks
   }
