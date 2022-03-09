@@ -65,7 +65,7 @@ class Computer extends Player {
 
   defineNextMove() {
     const enemy = PlayerManager.getNotCurrent();
-    if (
+    if ( // if it hits a ship for the first time
       enemy.gameboard.lastAttackHitShip()
       && !enemy.gameboard.lastAttackSankShip()
       && !this.firstHitAtShip
