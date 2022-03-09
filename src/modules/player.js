@@ -24,7 +24,7 @@ class Player {
 class Computer extends Player {
   constructor() {
     super('Computer');
-    this.firstHitAtShip = null;
+    this.lastHitAtShip = null;
     this.tryingToSinkShip = false;
   }
 
@@ -45,7 +45,7 @@ class Computer extends Player {
   }
 
   #getPotentialAttackToSinkShip(possibleAttacks) {
-    const potentialShipCells = getPerpendicularCells(this.firstHitAtShip); // Where there might be a ship
+    const potentialShipCells = getPerpendicularCells(this.lastHitAtShip); // Where there might be a ship
 
     possibleAttacks = stringifyElements(possibleAttacks);
 
@@ -68,16 +68,12 @@ class Computer extends Player {
 
   defineNextMove() {
     const enemy = PlayerManager.getNotCurrent();
-    if ( // if it hits a ship for the first time
-      enemy.gameboard.lastAttackHitShip()
-      && !enemy.gameboard.lastAttackSankShip()
-      && !this.firstHitAtShip
-    ) {
+    if (enemy.gameboard.lastAttackHitShip() && !enemy.gameboard.lastAttackSankShip()) {
       this.tryingToSinkShip = true;
-      this.firstHitAtShip = enemy.gameboard.getLastAttack();
+      this.lastHitAtShip = enemy.gameboard.getLastAttack();
     } else if (enemy.gameboard.lastAttackSankShip()) {
       this.tryingToSinkShip = false;
-      this.firstHitAtShip = null;
+      this.lastHitAtShip = null;
     }
   }
 }
