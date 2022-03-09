@@ -16,6 +16,9 @@ class Player {
     return this.#gameboard;
   }
 
+  isGameOver() {
+    return this.#gameboard.areAllShipsSunk();
+  }
 }
 
 class Computer extends Player {
