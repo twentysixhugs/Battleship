@@ -32,8 +32,9 @@ class Computer extends Player {
       this.attackNearShip(possibleAttacks);
     } else {
       this.attackRandomCell(possibleAttacks);
-      this.defineNextMove()
     }
+
+    this.defineNextMove();
   }
 
   #getRandomCoordinates(possibleAttacks) {
@@ -41,12 +42,12 @@ class Computer extends Player {
   }
 
   #getPotentialAttackToSinkShip(possibleAttacks) {
-    const potentialShipCells = stringifyElements(getPerpendicularCells(this.firstHitAtShip)); // Where there might be a ship
+    const potentialShipCells = getPerpendicularCells(this.firstHitAtShip); // Where there might be a ship
 
     possibleAttacks = stringifyElements(possibleAttacks);
 
     const notAttackedPotentialShipCells = potentialShipCells.filter(
-      cell => possibleAttacks.includes(cell)
+      cell => possibleAttacks.includes(cell.toString())
     );
 
     return notAttackedPotentialShipCells[Math.floor(Math.random() * notAttackedPotentialShipCells.length)];
@@ -54,17 +55,21 @@ class Computer extends Player {
 
   attackRandomCell(possibleAttacks) {
     const attack = this.#getRandomCoordinates(possibleAttacks);
-    PlayerManager.handleGameboardAttack(this, attack);
+    PlayerManager.handleGameboardAttack(attack);
   }
 
   attackNearShip(possibleAttacks) {
     const attack = this.#getPotentialAttackToSinkShip(possibleAttacks);
-    PlayerManager.handleGameboardAttack(this, attack);
+    PlayerManager.handleGameboardAttack(attack);
   }
 
   defineNextMove() {
     const enemy = PlayerManager.getNotCurrent();
-    if (enemy.gameboard.lastAttackHitShip() && !enemy.gameboard.lastAttackSankShip()) {
+    if (
+      enemy.gameboard.lastAttackHitShip()
+      && !enemy.gameboard.lastAttackSankShip()
+      && !this.firstHitAtShip
+    ) {
       this.tryingToSinkShip = true;
       this.firstHitAtShip = enemy.gameboard.getLastAttack();
     } else if (enemy.gameboard.lastAttackSankShip()) {
