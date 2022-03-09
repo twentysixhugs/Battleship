@@ -42,6 +42,7 @@ const PlayerManager = (() => {
   return {
     setCurrent,
     getCurrent,
+    getNotCurrent,
     handleGameboardAttack,
     addPlayer,
     getPlayerPossibleAttacks
