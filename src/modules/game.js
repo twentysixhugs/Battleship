@@ -20,7 +20,37 @@ const Game = (() => {
     _gameGoing = true;
   }
 
+  function stop() {
+    _gameGoing = false;
+  }
 
+  function respondToMove() {
+    const attacker = PlayerManager.getCurrent();
+    const attacked = PlayerManager.getNotCurrent();
+
+    PlayerManager.handleGameboardAttack(Input.getLastMove());
+
+    if (!attacked.gameboard.isLastAttackSuccessful()) {
+      return;
+    }
+
+    if (!enemy.gameboard.lastAttackHitShip()) {
+      PlayerManager.toggleCurrent();
+    }
+
+    if (attacked.isGameOver()) {
+      stop();
+      _winner = attacker;
+    }
+  }
+
+  function isGoing() {
+    return _gameGoing;
+  }
+
+  function getWinner() {
+    return _winner;
+  }
 
   function _placeShips(player1, player2) {
     // TODO: 
