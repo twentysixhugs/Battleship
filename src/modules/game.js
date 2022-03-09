@@ -74,7 +74,10 @@ const Game = (() => {
 
   return {
     start,
+    stop,
     respondToMove,
+    isGoing,
+    getWinner,
   }
 })();
 
