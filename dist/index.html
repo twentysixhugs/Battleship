@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./style.css">
+  <title>Battleship game</title>
+</head>
+
+<body>
+  <h1 class="heading">Battleship</h1>
+  <div class="game">
+    <div class="gameboard js-gameboard js-player-gameboard is-visible">
+      <div class="gameboard__coordinates"></div>
+      <div class="gameboard__coordinates"></div>
+      <div class="gameboard__battlefield js-battlefield"></div>
+      <div class="gameboard__buttons">
+        <button class="gameboard_btn js-random">Random</button>
+        <button class="gameboard_btn js-reset">Reset</button>
+      </div>
+    </div>
+    <div class="port js-port">
+      <div class="port__ships">
+        <div class="ship ship--4"></div>
+        <div class="ship ship--3"></div>
+        <div class="ship ship--3"></div>
+        <div class="ship ship--2"></div>
+        <div class="ship ship--2"></div>
+        <div class="ship ship--2"></div>
+        <div class="ship ship--1"></div>
+        <div class="ship ship--1"></div>
+        <div class="ship ship--1"></div>
+        <div class="ship ship--1"></div>
+      </div>
+      <button class="port__btn js-fight">
+        Fight!
+      </button>
+    </div>
+    <div class="gameboard js-gameboard js-player-gameboard">
+      <div class="gameboard__coordinates"></div>
+      <div class="gameboard__coordinates"></div>
+      <div class="gameboard__battlefield js-battlefield"></div>
+      <div class="gameboard__buttons">
+        <button class="gameboard_btn js-random">Random</button>
+        <button class="gameboard_btn js-reset">Reset</button>
+      </div>
+    </div>
+  </div>
+  <script src="./main.js"></script>
+</body>
+
+</html>
