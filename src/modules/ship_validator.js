@@ -18,7 +18,7 @@ export default validateShipPlacement;
 function getForbiddenCoordinates(ships) {
   const forbiddenCoordinates = ships
     .map(ship => {
-      const shipCoordinates = stringifyElements(ship.getCoordinates());
+      const shipCoordinates = ship.getCoordinates();
       return getCellsSurroundingShip(shipCoordinates);
     })
     .flat();
