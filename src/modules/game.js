@@ -34,7 +34,7 @@ const Game = (() => {
       return;
     }
 
-    if (!enemy.gameboard.lastAttackHitShip()) {
+    if (!attacked.gameboard.lastAttackHitShip()) {
       PlayerManager.toggleCurrent();
     }
 
