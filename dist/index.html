@@ -39,12 +39,13 @@
         <span class="gameboard__coordinate">10</span>
       </div>
       <div class="gameboard__battlefield js-battlefield"></div>
-      <div class="gameboard__buttons">
+      <div class="gameboard__buttons js-gameboard-buttons is-visible">
+        <!-- The buttons are not clickable once they are hidden. The event listeners are removed -->
         <button class="gameboard__btn js-random">Random</button>
         <button class="gameboard__btn js-reset">Reset</button>
       </div>
     </div>
-    <div class="port js-port">
+    <div class="port js-port is-visible">
       <div class="port__ships">
         <h2 class="port__heading">Drag and drop your ships</h2>
         <div class="wrapper wrapper--ships">
@@ -66,6 +67,7 @@
           <div class="ship ship--1"></div>
         </div>
       </div>
+      <!-- The buttons is not clickable once it is hidden. The event listener is removed -->
       <button class="port__btn js-start">
         Fight!
       </button>
