@@ -1,4 +1,6 @@
-function initializeBattlefields() {
+import Input from "../input";
+
+function fillBattlefieldsWithCells() {
   const battlefields = document.querySelectorAll('.js-battlefield');
   battlefields.forEach(fillWithCells);
 }
@@ -15,15 +17,16 @@ function fillWithCells(battlefield) {
     cell.classList.add('gameboard__cell', 'js-cell');
     cell.dataset.coordinate = coordinate;
 
-    return cell
+    return cell;
   }
 }
 
-function addEvents() {
-  const cells = document.querySelectorAll('')
+function addEventsToCells(callback) {
+  const cells = document.querySelectorAll('.js-cell');
+  cells.forEach(cell => cell.addEventListener('click', callback));
 }
 
-
 export {
-  initializeBattlefields,
+  fillBattlefieldsWithCells,
+  addEventsToCells
 }
