@@ -35,9 +35,9 @@ describe('attack receiving and handling', () => {
 
     const attackCoordinate = [6, 2];
     gameboard.receiveAttack(attackCoordinate);
-    expect(gameboard.isLastAttackSucessful()).toBeTruthy();
+    expect(gameboard.isLastAttackSuccessful()).toBeTruthy();
     gameboard.receiveAttack(attackCoordinate);
-    expect(gameboard.isLastAttackSucessful()).toBeFalsy();
+    expect(gameboard.isLastAttackSuccessful()).toBeFalsy();
     expect(gameboard.getAllAttacks()).toEqual([[6, 2]]);
   });
 
@@ -45,9 +45,9 @@ describe('attack receiving and handling', () => {
     const gameboard = new Gameboard();
     const attackCoordinate = [6, 2];
     gameboard.receiveAttack(attackCoordinate)
-    expect(gameboard.isLastAttackSucessful()).toBeTruthy();
+    expect(gameboard.isLastAttackSuccessful()).toBeTruthy();
     gameboard.receiveAttack(attackCoordinate)
-    expect(gameboard.isLastAttackSucessful()).toBeFalsy();
+    expect(gameboard.isLastAttackSuccessful()).toBeFalsy();
     expect(gameboard.getAllAttacks()).toEqual([[6, 2]]);
   })
 
