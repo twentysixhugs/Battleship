@@ -70,6 +70,7 @@ button {
 }
 
 .port__heading,
+.heading,
 .gameboard__coordinate {
   user-select: none;
   -moz-user-select: none;
