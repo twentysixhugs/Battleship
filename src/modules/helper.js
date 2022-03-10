@@ -43,8 +43,13 @@ function stringifyElements(arr) {
   return arr.map(el => el.toString());
 }
 
+function convertElementsToNumbers(arr) {
+  return arr.map(el => Number(el));
+}
+
 export {
   getCellsSurroundingCell,
   getPerpendicularCells,
-  stringifyElements
+  stringifyElements,
+  convertElementsToNumbers
 };
