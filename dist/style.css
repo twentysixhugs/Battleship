@@ -55,7 +55,8 @@ body {
 body {
   display: flex;
   flex-flow: column;
-  gap: 100px;
+  align-items: center;
+  gap: 50px;
 }
 
 /* || Utils */
@@ -78,6 +79,7 @@ button {
 /* || Heading */
 
 .heading {
+  margin-top: 50px;
   font-size: 3rem;
 }
 
