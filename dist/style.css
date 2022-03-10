@@ -1,0 +1,226 @@
+/* || RESET */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, button, input {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* || General */
+
+html,
+body {
+  height: 100vh;
+  font-size: 16px;
+}
+
+body {
+  display: flex;
+  flex-flow: column;
+  gap: 100px;
+}
+
+/* || Utils */
+
+button {
+  cursor: pointer;
+}
+
+.ship {
+  cursor: pointer;
+}
+
+.port__heading,
+.gameboard__coordinate {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+/* || Heading */
+
+.heading {
+  font-size: 3rem;
+}
+
+/* || Game */
+
+.game {
+  --cell-size: 2.7vw;
+  --button-height: calc(var(--cell-size) * 1.3);
+  --button-width: calc(var(--cell-size) * 10 * 3 / 8);
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+}
+
+/* || Gameboard */
+
+.gameboard {
+  display: none;
+  grid-template-rows: var(--cell-size) calc(var(--cell-size) * 10) calc(var(--cell-size) * 2);
+  grid-template-columns: var(--cell-size) calc(var(--cell-size) * 10 * 3 / 4) calc(var(--cell-size) * 10 * 1 / 4);
+}
+
+.gameboard.is-visible {
+  display: grid;
+}
+
+/* || Coordinates */
+
+.gameboard__coordinates {
+  display: flex;
+}
+
+.gameboard__coordinates--letters {
+  grid-row: 1 / 2;
+  grid-column: 2 / -1;
+
+  flex-flow: row nowrap;
+}
+
+.gameboard__coordinates--numbers {
+  grid-row: 2 / -1;
+  grid-column: 1 / 2;
+
+  flex-flow: column nowrap;
+}
+
+.gameboard__coordinate {
+  height: var(--cell-size);
+  width: var(--cell-size);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* || Battlefield */
+
+.gameboard__battlefield {
+  grid-row: 2 / -1;
+  grid-column: 2 / -1;
+  display: grid;
+  grid-template: repeat(10, 1fr) / repeat(10, 1fr);
+  width: calc(var(--cell-size) * 10);
+  height: calc(var(--cell-size) * 10); /* Viewport width, not height */
+  border: 1px solid black;
+}
+
+.gameboard__cell {
+  border: 1px solid black;
+}
+
+/* || Gameboard buttons */
+
+.gameboard__buttons {
+  grid-row: -2 / -1;
+  grid-column: 2 / 3;
+  align-self: end;
+
+  display: flex;
+  gap: 1rem;
+
+  width: 100%;
+}
+
+.gameboard__btn {
+  width: var(--button-width);
+  height: var(--button-height);
+}
+
+/* || Port */
+
+.port {
+  padding-top: 10px;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+
+.port__heading {
+  height: var(--cell-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 24px;
+}
+
+.port__ships {
+  display: flex;
+  flex-flow: column;
+  gap: 2rem;
+}
+
+.wrapper--ships-line {
+  display: flex;
+  gap: 1rem;
+}
+
+.ship {
+  border: 2px solid black;
+}
+
+.ship--4 {
+  width: calc(var(--cell-size) * 4);
+  height: var(--cell-size);
+}
+
+.ship--3 {
+  width: calc(var(--cell-size) * 3);
+  height: var(--cell-size);
+}
+
+.ship--2 {
+  width: calc(var(--cell-size) * 2);
+  height: var(--cell-size);
+}
+
+.ship--1 {
+  width: calc(var(--cell-size) * 1);
+  height: var(--cell-size);
+}
+
+.port__btn {
+  width: calc(var(--button-width) * 1.2);
+  height: calc(var(--button-height) * 1.2);
+}
