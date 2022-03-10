@@ -174,9 +174,13 @@ button {
 
 .port {
   padding-top: 10px;
-  display: flex;
+  display: none;
   flex-flow: column;
   justify-content: space-between;
+}
+
+.port.is-visible {
+  display: flex;
 }
 
 .port__heading {
