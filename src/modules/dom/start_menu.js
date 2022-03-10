@@ -5,7 +5,7 @@ function addEventsToButtons(cbRandom, cbReset, cbStart) {
 
   random.addEventListener('click', cbRandom);
   reset.addEventListener('click', cbReset);
-  start.addEventListener('click', startGame);
+  start.addEventListener('click', cbStart);
 }
 
 export {
