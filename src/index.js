@@ -1,12 +1,22 @@
-document.querySelectorAll('.js-battlefield').forEach(gameboard => {
-  for (let i = 0; i < 100; i++) {
-    gameboard.appendChild(createCell());
-  }
-});
+import { fillBattlefieldsWithCells, addEventsToCells } from "./modules/dom/battlefield";
+import { addEventsToButtons } from "./modules/dom/start_menu";
+import UIGameState from "./modules/dom/game_state";
+import Game from "./modules/game";
+import Input from "./modules/input";
 
-function createCell() {
-  const cell = document.createElement('div');
-  cell.classList.add('gameboard__cell');
+(() => {
+  fillBattlefieldsWithCells();
+  addEventsToButtons(receiveStart, receiveStart, receiveStart);
+})();
 
-  return cell;
+
+function receiveMove(e) {
+  Input.setLastMove(e.target.dataset.coordinate.split(','));
+  Game.respondToMove();
+}
+
+function receiveStart() {
+  Game.start();
+  addEventsToCells(receiveMove);
+  UIGameState.startGame();
 }
