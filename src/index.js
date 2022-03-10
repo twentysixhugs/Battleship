@@ -18,5 +18,4 @@ function receiveMove(e) {
 function receiveStart() {
   Game.start();
   addEventsToCells(receiveMove);
-  UIGameState.startGame();
 }
