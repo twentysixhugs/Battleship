@@ -161,7 +161,6 @@ button {
   grid-column: 2 / 3;
   align-self: end;
 
-  display: flex;
   gap: 1rem;
 
   width: 100%;
