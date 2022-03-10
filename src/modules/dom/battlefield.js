@@ -1,5 +1,3 @@
-import Input from "../input";
-
 function fillBattlefieldsWithCells() {
   const battlefields = document.querySelectorAll('.js-battlefield');
   battlefields.forEach(fillWithCells);
