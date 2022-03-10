@@ -1,17 +1,20 @@
-function startGame() {
+const UIGameState = (() => {
+  function startGame() {
+  }
 
-}
+  function stopGame() {
 
-function stopGame() {
+  }
 
-}
+  function showGameResult() {
 
-function showGameResult() {
+  }
 
-}
+  return {
+    startGame,
+    stopGame,
+    showGameResult,
+  }
+})();
 
-export {
-  startGame,
-  stopGame,
-  showGameResult,
-}
+export default UIGameState;
