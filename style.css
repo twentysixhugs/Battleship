@@ -191,7 +191,7 @@ button {
 .port__ships {
   display: flex;
   flex-flow: column;
-  gap: 2rem;
+  gap: min(2rem, var(--cell-size));
 }
 
 .wrapper--ships-line {
