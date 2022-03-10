@@ -155,6 +155,8 @@ button {
 /* || Gameboard buttons */
 
 .gameboard__buttons {
+  display: none;
+
   grid-row: -2 / -1;
   grid-column: 2 / 3;
   align-self: end;
@@ -163,6 +165,10 @@ button {
   gap: 1rem;
 
   width: 100%;
+}
+
+.gameboard__buttons.is-visible {
+  display: flex;
 }
 
 .gameboard__btn {
