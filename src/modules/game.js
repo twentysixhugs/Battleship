@@ -8,7 +8,7 @@ const Game = (() => {
   let _winner = null;
 
   function start() {
-    let player = new Player(Input.getPlayerName());
+    let player = new Player();
     let computer = new Computer();
 
     PlayerManager.addPlayer(player);

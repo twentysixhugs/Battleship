@@ -6,8 +6,7 @@ import { stringifyElements } from "./helper";
 class Player {
   #gameboard;
 
-  constructor(name) {
-    this.name = name;
+  constructor() {
     this.#gameboard = new Gameboard();
     PlayerManager.addPlayer(this);
   }
