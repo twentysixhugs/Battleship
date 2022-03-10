@@ -2,6 +2,7 @@ import { Computer, Player } from "./player";
 import PlayerManager from "./player_manager";
 import Input from "./input";
 import Ship from "./ship";
+import UIGameState from "./dom/game_state";
 
 const Game = (() => {
   let _gameGoing = false;
@@ -18,6 +19,8 @@ const Game = (() => {
     _placeShips(player, computer);
 
     _gameGoing = true;
+
+    UIGameState.startGame();
   }
 
   function stop() {
@@ -36,6 +39,7 @@ const Game = (() => {
 
     if (!attacked.gameboard.lastAttackHitShip()) {
       PlayerManager.toggleCurrent();
+      UIGameState.toggleCurrentPlayer();
     }
 
     if (attacked.isGameOver()) {
