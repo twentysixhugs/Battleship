@@ -1,9 +1,9 @@
 import { Computer, Player } from "./player";
-import { addEventsToCells } from "./dom/battlefield";
 import PlayerManager from "./player_manager";
 import Input from "./input";
 import Ship from "./ship";
 import UIGameState from "./dom/game_state";
+import { playerMove, computerMove } from "./dom/battlefield";
 
 const Game = (() => {
   let _gameGoing = false;
@@ -17,6 +17,7 @@ const Game = (() => {
     _initUI();
 
     _gameGoing = true;
+    gameloop();
   }
 
   function stop() {
@@ -33,56 +34,42 @@ const Game = (() => {
   }
 
   function _initUI() {
-    addEventsToCells(handleComputerAttack, handlePlayerAttack);
     UIGameState.startGame();
   }
 
-  async function handlePlayerAttack(e) {
-    Input.setLastMove(e.target.dataset.coordinate.split(','));
-    respondToMove();
-    computer.makeMove();
-  }
+  async function gameloop() {
+    while (_gameGoing) {
+      await nextMove();
 
-  async function handleComputerAttack(e) {
-    Input.setLastMove(e.target.dataset.coordinate.split(','));
-    respondToMove();
-    computer.defineNextMove();
+      const attacker = PlayerManager.getCurrent();
+      const attacked = PlayerManager.getNotCurrent();
 
-    while (computer.tryingToSinkShip && player.gameboard.lastAttackHitShip()) {
-      await computer.makeMove();
-      computer.defineNextMove();
-    }
-  }
+      if (!attacked.gameboard.isLastAttackSuccessful()) {
+        break;
+      }
 
-  function respondToMove() {
-    const attacker = PlayerManager.getCurrent();
-    const attacked = PlayerManager.getNotCurrent();
+      if (attacked.isGameOver()) {
+        stop();
+        _winner = attacker;
+        console.log("winner: ", _winner);
+        UIGameState.showGameResult(winner === player ? 'win' : 'lose');
+        break;
+      }
 
-    PlayerManager.handleGameboardAttack(Input.getLastMove());
-
-    if (!attacked.gameboard.isLastAttackSuccessful()) {
-      return;
-    }
-
-    if (attacked.isGameOver()) {
-      stop();
-      _winner = attacker;
-      console.log(_winner);
-      return;
+      if (!attacked.gameboard.lastAttackHitShip()) {
+        console.log('last attack did not hit ship')
+        PlayerManager.toggleCurrent();
+        UIGameState.toggleCurrentPlayer();
+      }
     }
 
-    if (!attacked.gameboard.lastAttackHitShip()) {
-      console.log('last attack did not hit ship')
-      PlayerManager.toggleCurrent();
-      UIGameState.toggleCurrentPlayer();
-    }
-
-    return {
-      start,
-      stop,
-      respondToMove,
-      isGoing,
-      getWinner,
+    async function nextMove() {
+      if (PlayerManager.getCurrent() === player) {
+        await playerMove(player);
+      }
+      else if (PlayerManager.getCurrent() === computer) {
+        await computerMove(computer);
+      }
     }
   }
 
@@ -107,7 +94,6 @@ const Game = (() => {
   return {
     start,
     stop,
-    respondToMove,
     isGoing,
     getWinner,
   }
