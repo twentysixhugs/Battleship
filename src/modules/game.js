@@ -33,17 +33,19 @@ const Game = (() => {
   }
 
   function _initUI() {
-    addEventsToCells(_receiveMove, _receiveMove);
+    addEventsToCells(_receiveComputerMove, _receivePlayerMove);
     UIGameState.startGame();
   }
 
-  function _receiveMove(e) {
+  function _receivePlayerMove(e) {
     Input.setLastMove(e.target.dataset.coordinate.split(','));
     respondToMove();
-    if (PlayerManager.getCurrent() === computer) {
-      computer.makeMove();
-      computer.defineNextMove();
-    }
+    computer.makeMove();
+  }
+
+  function _receiveComputerMove(e) {
+    Input.setLastMove(e.target.dataset.coordinate.split(','));
+    respondToMove();
   }
 
   function respondToMove() {
