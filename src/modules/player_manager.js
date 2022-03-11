@@ -32,7 +32,7 @@ const PlayerManager = (() => {
 
   function handleGameboardAttack(coordinates) {
     const enemy = getNotCurrent();
-    enemy.gameboard.receiveAttack(coordinates);
+    enemy.gameboard.receiveAttack(coordinates.split(','));
   }
 
   return {
