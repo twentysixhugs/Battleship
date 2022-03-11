@@ -1,4 +1,5 @@
 import { Computer, Player } from "./player";
+import { addEventsToCells } from "./modules/dom/battlefield";
 import PlayerManager from "./player_manager";
 import Input from "./input";
 import Ship from "./ship";
@@ -7,24 +8,37 @@ import UIGameState from "./dom/game_state";
 const Game = (() => {
   let _gameGoing = false;
   let _winner = null;
+  let player = null;
+  let computer = null;
 
   function start() {
-    let player = new Player();
-    let computer = new Computer();
-
-    PlayerManager.addPlayer(player);
-    PlayerManager.addPlayer(computer);
-    PlayerManager.setCurrent(player);
-
+    _initPlayers();
     _placeShips(player, computer);
+    _initUI();
 
     _gameGoing = true;
-
-    UIGameState.startGame();
   }
 
   function stop() {
     _gameGoing = false;
+  }
+
+  function _initPlayers() {
+    player = new Player();
+    computer = new Computer();
+
+    PlayerManager.addPlayer(player);
+    PlayerManager.addPlayer(computer);
+    PlayerManager.setCurrent(player);
+  }
+
+  function _initUI() {
+    addEventsToCells(_receiveMove);
+    UIGameState.startGame();
+  }
+  function _receiveMove(e) {
+    Input.setLastMove(e.target.dataset.coordinate.split(','));
+    respondToMove(); // I need game loop. Commit the game and try again branch
   }
 
   function respondToMove() {
@@ -37,14 +51,17 @@ const Game = (() => {
       return;
     }
 
-    if (!attacked.gameboard.lastAttackHitShip()) {
-      PlayerManager.toggleCurrent();
-      UIGameState.toggleCurrentPlayer();
-    }
-
     if (attacked.isGameOver()) {
       stop();
       _winner = attacker;
+      console.log(_winner);
+      return;
+    }
+
+    if (!attacked.gameboard.lastAttackHitShip()) {
+      console.log('last attack did not hit ship')
+      PlayerManager.toggleCurrent();
+      UIGameState.toggleCurrentPlayer();
     }
   }
 
@@ -61,19 +78,9 @@ const Game = (() => {
     // Loop over data from the input
     // Place it.
     /* Validation must be done in input, this function should only place valid data */
-    player1.gameboard.placeShip(new Ship([[1, 1], [1, 2], [1, 3], [1, 4]]));
-    player1.gameboard.placeShip(new Ship([[3, 1], [3, 2], [3, 3]]));
-    player1.gameboard.placeShip(new Ship([[2, 7], [3, 7], [4, 7]]));
-    player1.gameboard.placeShip(new Ship([[7, 3], [8, 3]]));
-    player1.gameboard.placeShip(new Ship([[1, 10], [2, 10]]));
-    player1.gameboard.placeShip(new Ship([[8, 9], [9, 9]]));
+    player1.gameboard.placeShip(new Ship([1, 1], [1, 2], [1, 3], [1, 4]));
 
-    player2.gameboard.placeShip(new Ship([[1, 1], [1, 2], [1, 3], [1, 4]]));
-    player2.gameboard.placeShip(new Ship([[3, 1], [3, 2], [3, 3]]));
-    player2.gameboard.placeShip(new Ship([[2, 7], [3, 7], [4, 7]]));
-    player2.gameboard.placeShip(new Ship([[7, 3], [8, 3]]));
-    player2.gameboard.placeShip(new Ship([[1, 10], [2, 10]]));
-    player2.gameboard.placeShip(new Ship([[8, 9], [9, 9]]));
+    player2.gameboard.placeShip(new Ship([1, 1], [1, 2], [1, 3], [1, 4]));
   }
 
   return {
