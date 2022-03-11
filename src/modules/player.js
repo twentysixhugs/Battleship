@@ -38,6 +38,7 @@ class Computer extends Player {
     }
 
     this.#attackInDOM(this.currentAttack);
+    this.defineNextMove();
   }
 
   #getRandomCoordinates(possibleAttacks) {
