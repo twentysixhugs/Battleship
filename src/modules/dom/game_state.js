@@ -8,6 +8,7 @@ const UIGameState = (() => {
     _currentPlayer = 'player';
     _toggleStartGameInterface();
     _showBothBattlefields();
+    _toggleBoardDescriptions();
     playerTurn();
   }
 
@@ -67,6 +68,11 @@ const UIGameState = (() => {
     port.classList.toggle('is-visible');
     computerGameboard.classList.toggle('is-visible');
     gameboardButtons.classList.toggle('is-visible');
+  }
+
+  function _toggleBoardDescriptions() {
+    const descriptions = document.querySelectorAll('.js-description');
+    descriptions.forEach(node => node.classList.toggle('is-visible'));
   }
 
   return {

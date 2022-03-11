@@ -175,6 +175,20 @@ button {
   height: var(--button-height);
 }
 
+.gameboard__description {
+  grid-row: -2 / -1;
+  grid-column: 2 / 4;
+  display: none;
+}
+
+.gameboard__description.is-visible {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+
+  padding: 1rem;
+}
+
 /* || Port */
 
 .port {
