@@ -1,3 +1,5 @@
+import PlayerManager from "../player_manager";
+
 function fillBattlefieldsWithCells() {
   const playerBattlefield = document.querySelector('.js-player-battlefield');
   const computerBattlefield = document.querySelector('.js-computer-battlefield');
@@ -22,22 +24,44 @@ function fillWithCells(battlefield, jsClassName) {
   }
 }
 
-function addEventsToCells(playerCallback, computerCallback) {
-  _addEventsToPlayerCells(playerCallback);
-  _addEventsToComputerCells(computerCallback);
+
+function playerMove(player) {
+  _disableClicksForBattlefields('player');
+
+  return new Promise((resolve, reject) => {
+    const enemyCells = document.querySelectorAll('.js-cell--computer');
+    enemyCells.forEach(cell => cell.addEventListener('click', (e) => {
+      PlayerManager.handleGameboardAttack(e.target.dataset.coordinate);
+      resolve();
+    }));
+  });
 }
 
-function _addEventsToPlayerCells(cb) {
-  const cells = document.querySelectorAll('.js-cell--player');
-  cells.forEach(cell => cell.addEventListener('click', cb));
+function computerMove(computer) {
+  _disableClicksForBattlefields();
+
+  return new Promise((resolve, reject) => {
+    const enemyCells = document.querySelectorAll('.js-cell--player');
+    enemyCells.forEach(cell => cell.addEventListener('click', (e) => {
+      PlayerManager.handleGameboardAttack(e.target.dataset.coordinate);
+      resolve();
+    }));
+
+    computer.makeMove();
+  });
 }
 
-function _addEventsToComputerCells(cb) {
-  const cells = document.querySelectorAll('.js-cell--computer');
-  cells.forEach(cell => cell.addEventListener('click', cb));
+function _disableClicksForBattlefields() {
+  const cellsWithListeners = document.querySelectorAll(`.js-cell--player, .js-cell-computer`);
+
+  cellsWithListeners.forEach(cell => {
+    let cellWithoutListener = cell.cloneNode(true);
+    cell.parentNode.replaceChild(cellWithoutListener, cell);
+  });
 }
 
 export {
   fillBattlefieldsWithCells,
-  addEventsToCells
+  playerMove,
+  computerMove,
 }
