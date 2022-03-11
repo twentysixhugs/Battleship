@@ -26,16 +26,16 @@ function getCellsSurroundingCell(cell) {
 function getPerpendicularCells(cell) {
   return [
     // above
-    [cell[0], cell[1] - 1],
+    [Number(cell[0]), Number(cell[1]) - 1],
 
     // right
-    [cell[0] + 1, cell[1]],
+    [Number(cell[0]) + 1, Number(cell[1])],
 
     //left
-    [cell[0] - 1, cell[1]],
+    [Number(cell[0]) - 1, Number(cell[1])],
 
     // below
-    [cell[0], cell[1] + 1],
+    [Number(cell[0]), Number(cell[1]) + 1],
   ]
 }
 
