@@ -10,12 +10,6 @@ import Input from "./modules/input";
 })();
 
 
-function receiveMove(e) {
-  Input.setLastMove(e.target.dataset.coordinate.split(','));
-  Game.respondToMove();
-}
-
 function receiveStart() {
   Game.start();
-  addEventsToCells(undefined, receiveMove);
 }
