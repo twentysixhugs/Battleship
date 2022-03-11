@@ -31,12 +31,13 @@ class Computer extends Player {
     const possibleAttacks = PlayerManager.getPlayerPossibleAttacks(this);
 
     if (this.tryingToSinkShip) {
-      this.attackNearShip(possibleAttacks);
+      this.currentAttack = this.#getPotentialAttackToSinkShip(possibleAttacks);
     } else {
-      this.attackRandomCell(possibleAttacks);
+      // this.currentAttack = this.#getRandomCoordinates(possibleAttacks);
+      this.currentAttack = '1,1';
     }
 
-    this.defineNextMove();
+    this.#attackInDOM(this.currentAttack);
   }
 
   #getRandomCoordinates(possibleAttacks) {
@@ -55,14 +56,9 @@ class Computer extends Player {
     return notAttackedPotentialShipCells[Math.floor(Math.random() * notAttackedPotentialShipCells.length)];
   }
 
-  attackRandomCell(possibleAttacks) {
-    const attack = this.#getRandomCoordinates(possibleAttacks);
-    PlayerManager.handleGameboardAttack(attack);
-  }
-
-  attackNearShip(possibleAttacks) {
-    const attack = this.#getPotentialAttackToSinkShip(possibleAttacks);
-    PlayerManager.handleGameboardAttack(attack);
+  #attackInDOM(attack) {
+    document.querySelector(`.js-cell--player[data-coordinate="${attack}"]`).click();
+    console.log('computer clicked on ' + attack);
   }
 
   defineNextMove() {
