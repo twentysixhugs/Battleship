@@ -9,7 +9,7 @@ function fillBattlefieldsWithCells() {
 function fillWithCells(battlefield, jsClassName) {
   for (let i = 1; i <= 10; i++) {
     for (let j = 1; j <= 10; j++) {
-      battlefield.appendChild(_createCell([i, j], jsClassName));
+      battlefield.appendChild(_createCell([j, i], jsClassName));
     }
   }
 
