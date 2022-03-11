@@ -1,5 +1,5 @@
 import { Computer, Player } from "./player";
-import { addEventsToCells } from "./modules/dom/battlefield";
+import { addEventsToCells } from "./dom/battlefield";
 import PlayerManager from "./player_manager";
 import Input from "./input";
 import Ship from "./ship";
@@ -33,12 +33,17 @@ const Game = (() => {
   }
 
   function _initUI() {
-    addEventsToCells(_receiveMove);
+    addEventsToCells(_receiveMove, _receiveMove);
     UIGameState.startGame();
   }
+
   function _receiveMove(e) {
     Input.setLastMove(e.target.dataset.coordinate.split(','));
-    respondToMove(); // I need game loop. Commit the game and try again branch
+    respondToMove();
+    if (PlayerManager.getCurrent() === computer) {
+      computer.makeMove();
+      computer.defineNextMove();
+    }
   }
 
   function respondToMove() {
