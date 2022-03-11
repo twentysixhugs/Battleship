@@ -33,19 +33,25 @@ const Game = (() => {
   }
 
   function _initUI() {
-    addEventsToCells(_receiveComputerMove, _receivePlayerMove);
+    addEventsToCells(handleComputerAttack, handlePlayerAttack);
     UIGameState.startGame();
   }
 
-  function _receivePlayerMove(e) {
+  async function handlePlayerAttack(e) {
     Input.setLastMove(e.target.dataset.coordinate.split(','));
     respondToMove();
     computer.makeMove();
   }
 
-  function _receiveComputerMove(e) {
+  async function handleComputerAttack(e) {
     Input.setLastMove(e.target.dataset.coordinate.split(','));
     respondToMove();
+    computer.defineNextMove();
+
+    while (computer.tryingToSinkShip && player.gameboard.lastAttackHitShip()) {
+      await computer.makeMove();
+      computer.defineNextMove();
+    }
   }
 
   function respondToMove() {
@@ -69,6 +75,14 @@ const Game = (() => {
       console.log('last attack did not hit ship')
       PlayerManager.toggleCurrent();
       UIGameState.toggleCurrentPlayer();
+    }
+
+    return {
+      start,
+      stop,
+      respondToMove,
+      isGoing,
+      getWinner,
     }
   }
 
