@@ -43,7 +43,7 @@ function Gameboard() {
     const lastAttack = this.getLastAttack();
     const lastShipHit = _ships.find(ship => stringifyElements(ship.getCoordinates()).includes(lastAttack.toString()));
 
-    return lastShipHit.isSunk();
+    return lastShipHit ? lastShipHit.isSunk() : false;
   }
 
   this.getAllCells = function () {
