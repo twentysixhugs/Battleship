@@ -17,5 +17,5 @@ function receiveMove(e) {
 
 function receiveStart() {
   Game.start();
-  addEventsToCells(receiveMove);
+  addEventsToCells(undefined, receiveMove);
 }
