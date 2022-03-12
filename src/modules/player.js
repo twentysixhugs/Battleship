@@ -33,8 +33,8 @@ class Computer extends Player {
     if (this.tryingToSinkShip) {
       this.currentAttack = this.#getPotentialAttackToSinkShip(possibleAttacks);
     } else {
-      // this.currentAttack = this.#getRandomCoordinates(possibleAttacks);
-      this.currentAttack = '1,1';
+      this.currentAttack = this.#getRandomCoordinates(possibleAttacks);
+      // this.currentAttack = '1,1';
     }
 
     this.#attackInDOM(this.currentAttack);
@@ -46,12 +46,12 @@ class Computer extends Player {
   }
 
   #getPotentialAttackToSinkShip(possibleAttacks) {
-    const potentialShipCells = getPerpendicularCells(this.lastHitAtShip); // Where there might be a ship
+    const potentialShipCells = stringifyElements(getPerpendicularCells(this.lastHitAtShip)); // Where there might be the attacked ship
 
     possibleAttacks = stringifyElements(possibleAttacks);
 
     const notAttackedPotentialShipCells = potentialShipCells.filter(
-      cell => possibleAttacks.includes(cell.toString())
+      cell => possibleAttacks.includes(cell)
     );
 
     return notAttackedPotentialShipCells[Math.floor(Math.random() * notAttackedPotentialShipCells.length)];
@@ -59,7 +59,6 @@ class Computer extends Player {
 
   #attackInDOM(attack) {
     document.querySelector(`.js-cell--player[data-coordinate="${attack}"]`).click();
-    console.log('computer clicked on ' + attack);
   }
 
   defineNextMove() {
