@@ -73,14 +73,6 @@ const Game = (() => {
     }
   }
 
-  function isGoing() {
-    return _gameGoing;
-  }
-
-  function getWinner() {
-    return _winner;
-  }
-
   function _placeShips(player1, player2) {
     // TODO: 
     // Loop over data from the input
@@ -93,9 +85,6 @@ const Game = (() => {
 
   return {
     start,
-    stop,
-    isGoing,
-    getWinner,
   }
 })();
 
