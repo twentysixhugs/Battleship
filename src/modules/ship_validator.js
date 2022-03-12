@@ -1,5 +1,8 @@
 import { getCellsSurroundingCell, stringifyElements } from './helper';
 
+/* The purpose of this module is to not allow to place ships */
+/* Adjacent to each other. There must be some space between them */
+
 function validateShipPlacement(validatedShip, ships) {
   const shipCells = stringifyElements(validatedShip.getCoordinates());
   const forbiddenCoordinates = stringifyElements(getForbiddenCoordinates(ships));
