@@ -45,7 +45,7 @@ const Game = (() => {
       const attacked = PlayerManager.getNotCurrent();
 
       if (!attacked.gameboard.isLastAttackSuccessful()) {
-        break;
+        continue;
       }
 
       if (attacked.isGameOver()) {
