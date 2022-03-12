@@ -1,4 +1,11 @@
 function Ship(...coordinates) {
+  /* Coordinates are ship's location on board */
+  /* They are received and not created here. Look like [2, 3] */
+  /* Positions are ship's inner handling of these coordinates */
+  /* Positions are used when deciding where the ship is hit, */
+  /* Whether or not it is sunk, and where exactly */
+  /* To hit the ship in the first place */
+
   const _positions = _createPositions(coordinates.length);
 
   const _coordinates = coordinates;
