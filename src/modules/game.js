@@ -17,10 +17,10 @@ const Game = (() => {
     _initUI();
 
     _gameGoing = true;
-    gameloop();
+    _gameloop();
   }
 
-  function stop() {
+  function _stop() {
     _gameGoing = false;
   }
 
@@ -37,7 +37,7 @@ const Game = (() => {
     UIGameState.startGame();
   }
 
-  async function gameloop() {
+  async function _gameloop() {
     while (_gameGoing) {
       await nextMove();
 
@@ -49,7 +49,7 @@ const Game = (() => {
       }
 
       if (attacked.isGameOver()) {
-        stop();
+        _stop();
         _winner = attacker;
         console.log("winner: ", _winner);
         UIGameState.showGameResult(_winner === player ? 'win' : 'lose');
