@@ -24,34 +24,34 @@ function fillWithCells(battlefield, jsClassName) {
   }
 }
 
+function _addMoveListenerForEnemyCells(promiseResolveCallback, enemyCellsHTMLClass) {
+  const enemyCells = document.querySelectorAll(enemyCellsHTMLClass);
+  enemyCells.forEach(cell => cell.addEventListener('click', (e) => {
+    PlayerManager.handleGameboardAttack(e.target.dataset.coordinate);
+    promiseResolveCallback();
+  }));
+}
+
 
 function playerMove(player) {
-  _disableClicksForBattlefields('player');
+  _removeAllMoveListeners();
 
   return new Promise((resolve, reject) => {
-    const enemyCells = document.querySelectorAll('.js-cell--computer');
-    enemyCells.forEach(cell => cell.addEventListener('click', (e) => {
-      PlayerManager.handleGameboardAttack(e.target.dataset.coordinate);
-      resolve();
-    }));
+    _addMoveListenerForEnemyCells(resolve, '.js-cell--computer');
   });
 }
 
 function computerMove(computer) {
-  _disableClicksForBattlefields();
+  _removeAllMoveListeners();
 
   return new Promise((resolve, reject) => {
-    const enemyCells = document.querySelectorAll('.js-cell--player');
-    enemyCells.forEach(cell => cell.addEventListener('click', (e) => {
-      PlayerManager.handleGameboardAttack(e.target.dataset.coordinate);
-      resolve();
-    }));
-
+    _addMoveListenerForEnemyCells(resolve, '.js-cell--player');
     computer.makeMove();
   });
+
 }
 
-function _disableClicksForBattlefields() {
+function _removeAllMoveListeners() {
   const cellsWithListeners = document.querySelectorAll(`.js-cell--player, .js-cell--computer`);
 
   cellsWithListeners.forEach(cell => {
