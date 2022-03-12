@@ -1,4 +1,4 @@
-import { getCellsSurroundingCell, stringifyElements } from './helper';
+import { getCellsSurroundingShip, stringifyElements } from './helper';
 
 /* The purpose of this module is to not allow to place ships */
 /* Adjacent to each other. There must be some space between them */
@@ -32,12 +32,4 @@ function getForbiddenCoordinates(ships) {
   });
 
   return forbiddenCoordinates;
-}
-
-function getCellsSurroundingShip(shipCoordinates) {
-  const cellsSurroundingShip = shipCoordinates
-    .map(getCellsSurroundingCell)
-    .flat()
-
-  return cellsSurroundingShip;
 }

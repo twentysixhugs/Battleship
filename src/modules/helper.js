@@ -47,9 +47,18 @@ function convertElementsToNumbers(arr) {
   return arr.map(el => Number(el));
 }
 
+function getCellsSurroundingShip(shipCoordinates) {
+  const cellsSurroundingShip = shipCoordinates
+    .map(getCellsSurroundingCell)
+    .flat()
+
+  return cellsSurroundingShip;
+}
+
 export {
   getCellsSurroundingCell,
   getPerpendicularCells,
   stringifyElements,
-  convertElementsToNumbers
+  convertElementsToNumbers,
+  getCellsSurroundingShip,
 };
