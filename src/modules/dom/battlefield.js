@@ -1,5 +1,7 @@
 import PlayerManager from "../player_manager";
 
+/* Cells generation */
+
 function fillBattlefieldsWithCells() {
   const playerBattlefield = document.querySelector('.js-player-battlefield');
   const computerBattlefield = document.querySelector('.js-computer-battlefield');
@@ -24,14 +26,11 @@ function fillWithCells(battlefield, jsClassName) {
   }
 }
 
-function _addMoveListenerForEnemyCells(promiseResolveCallback, enemyCellsHTMLClass) {
-  const enemyCells = document.querySelectorAll(enemyCellsHTMLClass);
-  enemyCells.forEach(cell => cell.addEventListener('click', (e) => {
-    PlayerManager.handleGameboardAttack(e.target.dataset.coordinate);
-    promiseResolveCallback();
-  }));
-}
+/* Player and computer move */
 
+/* The promises are resolved once the cell is clicked */
+/* The outer module, game, will await for the promise to resolve, */
+/* And the move captured in this module will be handled */
 
 function playerMove(player) {
   _removeAllMoveListeners();
@@ -49,6 +48,14 @@ function computerMove(computer) {
     computer.makeMove();
   });
 
+}
+
+function _addMoveListenerForEnemyCells(promiseResolveCallback, enemyCellsHTMLClass) {
+  const enemyCells = document.querySelectorAll(enemyCellsHTMLClass);
+  enemyCells.forEach(cell => cell.addEventListener('click', (e) => {
+    PlayerManager.handleGameboardAttack(e.target.dataset.coordinate);
+    promiseResolveCallback();
+  }));
 }
 
 function _removeAllMoveListeners() {
