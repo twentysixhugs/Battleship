@@ -24,19 +24,33 @@ function getCellsSurroundingCell(cell) {
 }
 
 function getPerpendicularCells(cell) {
-  return [
-    // above
-    [Number(cell[0]), Number(cell[1]) - 1],
+  let cellAbove;
+  let cellBelow;
+  let cellToTheLeft;
+  let cellToTheRight;
+  let perpendicularCells = [];
 
-    // right
-    [Number(cell[0]) + 1, Number(cell[1])],
+  if (cell[1] > 1) {
+    cellAbove = [Number(cell[0]), Number(cell[1]) - 1];
+    perpendicularCells.push(cellAbove);
+  }
 
-    //left
-    [Number(cell[0]) - 1, Number(cell[1])],
+  if (cell[1] < 10) {
+    cellBelow = [Number(cell[0]), Number(cell[1]) + 1];
+    perpendicularCells.push(cellBelow);
+  }
 
-    // below
-    [Number(cell[0]), Number(cell[1]) + 1],
-  ]
+  if (cell[0] < 10) {
+    cellToTheRight = [Number(cell[0]) + 1, Number(cell[1])];
+    perpendicularCells.push(cellToTheRight);
+  }
+
+  if (cell[0] > 1) {
+    cellToTheLeft = [Number(cell[0]) - 1, Number(cell[1])];
+    perpendicularCells.push(cellToTheLeft);
+  }
+
+  return [...perpendicularCells];
 }
 
 function stringifyElements(arr) {
