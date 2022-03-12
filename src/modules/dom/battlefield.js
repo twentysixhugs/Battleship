@@ -52,7 +52,7 @@ function computerMove(computer) {
 }
 
 function _disableClicksForBattlefields() {
-  const cellsWithListeners = document.querySelectorAll(`.js-cell--player, .js-cell-computer`);
+  const cellsWithListeners = document.querySelectorAll(`.js-cell--player, .js-cell--computer`);
 
   cellsWithListeners.forEach(cell => {
     let cellWithoutListener = cell.cloneNode(true);
