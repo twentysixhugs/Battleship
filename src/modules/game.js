@@ -52,7 +52,7 @@ const Game = (() => {
         stop();
         _winner = attacker;
         console.log("winner: ", _winner);
-        UIGameState.showGameResult(winner === player ? 'win' : 'lose');
+        UIGameState.showGameResult(_winner === player ? 'win' : 'lose');
         break;
       }
 
