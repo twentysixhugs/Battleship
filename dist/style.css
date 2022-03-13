@@ -71,7 +71,8 @@ button {
 
 .port__heading,
 .heading,
-.gameboard__coordinate {
+.gameboard__coordinate,
+.gameboard__description {
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -150,6 +151,10 @@ button {
 
 .gameboard__cell {
   border: 1px solid black;
+}
+
+.gameboard__cell--attacked {
+  background: rgb(139, 0, 0);
 }
 
 /* || Gameboard buttons */
