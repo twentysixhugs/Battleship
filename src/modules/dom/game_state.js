@@ -17,12 +17,30 @@ const UIGameState = (() => {
     _removeAllMoveListeners();
   }
 
-  function showGameResult(result) {
-    // result === 'lose' or 'win'
-    console.log('UI: ' + result);
+  function showGameResult(isPlayerWinner) {
+    if (isPlayerWinner) {
+      _showPlayerVictory();
+    } else {
+      _showPlayerDefeat();
+    }
   }
 
+  function _showPlayerVictory() {
+    _toggleResult();
+    const result = document.querySelector('.js-result');
+    result.textContent = 'Victory!';
+  }
 
+  function _showPlayerDefeat() {
+    _toggleResult();
+    const result = document.querySelector('.js-result');
+    result.textContent = 'Defeat!';
+  }
+
+  function _toggleResult() {
+    const resultContainer = document.querySelector('.js-container--result');
+    resultContainer.classList.toggle('is-visible');
+  }
   /* Player and computer move */
 
   /* The promises are resolved once the cell is clicked */
