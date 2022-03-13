@@ -26,8 +26,6 @@ function fillWithCells(battlefield, jsClassName) {
   }
 }
 
-
-
 export {
   fillBattlefieldsWithCells,
 }
