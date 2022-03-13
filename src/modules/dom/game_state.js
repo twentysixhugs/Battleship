@@ -41,6 +41,7 @@ const UIGameState = (() => {
     const resultContainer = document.querySelector('.js-container--result');
     resultContainer.classList.toggle('is-visible');
   }
+
   /* Player and computer move */
 
   /* The promises are resolved once the cell is clicked */
@@ -71,7 +72,6 @@ const UIGameState = (() => {
 
     enemyCells.forEach(cell => cell.addEventListener('click', (e) => {
       PlayerManager.handleGameboardAttack(e.target.dataset.coordinate);
-      e.target.classList.add('gameboard__cell--attacked');
       promiseResolveCallback();
     }));
   }
