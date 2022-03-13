@@ -23,10 +23,6 @@ const PlayerManager = (() => {
     return _current;
   }
 
-  function getPlayer() {
-    return (_players[0] instanceof Player) ? _players[0] : _players[1];
-  }
-
   function getNotCurrent() {
     return (_current === _players[0]) ? _players[1] : _players[0];
   }
@@ -59,7 +55,6 @@ const PlayerManager = (() => {
   return {
     setCurrent,
     getCurrent,
-    getPlayer,
     getNotCurrent,
     toggleCurrent,
     addPlayer,
