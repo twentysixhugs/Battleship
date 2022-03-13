@@ -5,14 +5,20 @@ import { stringifyElements } from "./helper";
 
 class Player {
   #gameboard;
+  #name;
 
-  constructor() {
+  constructor(name) {
+    this.#name = name;
     this.#gameboard = new Gameboard();
     PlayerManager.addPlayer(this);
   }
 
   get gameboard() {
     return this.#gameboard;
+  }
+
+  get name() {
+    return this.#name;
   }
 
   isGameOver() {
@@ -33,8 +39,8 @@ class Computer extends Player {
   #hitsAtShip = []; // All hits at the current ship that it is trying to attack and sink
   #guessedShipPositions = []; // It will guess where the ship may be
 
-  constructor() {
-    super();
+  constructor(name) {
+    super(name);
   }
 
   /* Getters and setters are for testing purposes only */
