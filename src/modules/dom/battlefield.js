@@ -26,49 +26,8 @@ function fillWithCells(battlefield, jsClassName) {
   }
 }
 
-/* Player and computer move */
 
-/* The promises are resolved once the cell is clicked */
-/* The outer module, game, will await for the promise to resolve, */
-/* And the move captured in this module will be handled */
-
-function playerMove(player) {
-  _removeAllMoveListeners();
-
-  return new Promise((resolve, reject) => {
-    _addMoveListenerForEnemyCells(resolve, '.js-cell--computer');
-  });
-}
-
-function computerMove(computer) {
-  _removeAllMoveListeners();
-
-  return new Promise((resolve, reject) => {
-    _addMoveListenerForEnemyCells(resolve, '.js-cell--player');
-    computer.makeMove();
-  });
-
-}
-
-function _addMoveListenerForEnemyCells(promiseResolveCallback, enemyCellsHTMLClass) {
-  const enemyCells = document.querySelectorAll(enemyCellsHTMLClass);
-  enemyCells.forEach(cell => cell.addEventListener('click', (e) => {
-    PlayerManager.handleGameboardAttack(e.target.dataset.coordinate);
-    promiseResolveCallback();
-  }));
-}
-
-function _removeAllMoveListeners() {
-  const cellsWithListeners = document.querySelectorAll(`.js-cell--player, .js-cell--computer`);
-
-  cellsWithListeners.forEach(cell => {
-    let cellWithoutListener = cell.cloneNode(true);
-    cell.parentNode.replaceChild(cellWithoutListener, cell);
-  });
-}
 
 export {
   fillBattlefieldsWithCells,
-  playerMove,
-  computerMove,
 }
