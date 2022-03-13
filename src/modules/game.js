@@ -49,7 +49,7 @@ const Game = (() => {
         _winner = attacker;
         console.log("winner: ", _winner);
         UIGameState.stopGame();
-        UIGameState.showGameResult(_winner === player ? 'win' : 'lose');
+        UIGameState.showGameResult(_winner === player ? 'player victory' : 'player defeat');
         break;
       }
 
