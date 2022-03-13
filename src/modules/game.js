@@ -3,6 +3,7 @@ import PlayerManager from "./player_manager";
 import Input from "./input";
 import Ship from "./ship";
 import UIGameState from "./dom/game_state";
+import { showHitAtShip, showMissedAttack, showSunkShip } from "./dom/battlefield";
 
 const Game = (() => {
   let _gameGoing = false;
@@ -24,8 +25,8 @@ const Game = (() => {
   }
 
   function _initPlayers() {
-    player = new Player();
-    computer = new Computer();
+    player = new Player('player');
+    computer = new Computer('computer');
 
     PlayerManager.addPlayer(player);
     PlayerManager.addPlayer(computer);
@@ -60,6 +61,9 @@ const Game = (() => {
       if (!attacked.gameboard.lastAttackHitShip()) {
         PlayerManager.toggleCurrent();
         UIGameState.toggleCurrentPlayer();
+        showMissedAttack(attacked.gameboard.getLastAttack(), attacked.name);
+      } else {
+        showHitAtShip(attacked.gameboard.getLastAttack(), attacked.name);
       }
     }
 
