@@ -1,4 +1,5 @@
 import { playerTurn, computerTurn } from "./current_player";
+import PlayerManager from "../player_manager";
 
 const UIGameState = (() => {
   let _currentPlayer;
@@ -13,11 +14,57 @@ const UIGameState = (() => {
   }
 
   function stopGame() {
-
+    _removeAllMoveListeners();
   }
 
-  function showGameResult() {
+  function showGameResult(result) {
+    // result === 'lose' or 'win'
+    console.log('UI: ' + result);
+  }
 
+
+  /* Player and computer move */
+
+  /* The promises are resolved once the cell is clicked */
+  /* The outer module, game, will await for the promise to resolve, */
+  /* And the move captured in this module will be handled */
+
+  function playerMove(player) {
+    _removeAllMoveListeners();
+
+    return new Promise((resolve, reject) => {
+      _addMoveListenerForEnemyCells(resolve, '.js-cell--computer');
+    });
+  }
+
+  function computerMove(computer) {
+    _removeAllMoveListeners();
+
+    return new Promise((resolve, reject) => {
+      _addMoveListenerForEnemyCells(resolve, '.js-cell--player');
+      setTimeout(() => {
+        computer.makeMove();
+      }, 500);
+    });
+  }
+
+  function _addMoveListenerForEnemyCells(promiseResolveCallback, enemyCellsHTMLClass) {
+    const enemyCells = document.querySelectorAll(enemyCellsHTMLClass);
+
+    enemyCells.forEach(cell => cell.addEventListener('click', (e) => {
+      PlayerManager.handleGameboardAttack(e.target.dataset.coordinate);
+      e.target.classList.add('gameboard__cell--attacked');
+      promiseResolveCallback();
+    }));
+  }
+
+  function _removeAllMoveListeners() {
+    const cellsWithListeners = document.querySelectorAll(`.js-cell--player, .js-cell--computer`);
+
+    cellsWithListeners.forEach(cell => {
+      let cellWithoutListener = cell.cloneNode(true);
+      cell.parentNode.replaceChild(cellWithoutListener, cell);
+    });
   }
 
 
@@ -80,6 +127,8 @@ const UIGameState = (() => {
     stopGame,
     showGameResult,
     toggleCurrentPlayer,
+    playerMove,
+    computerMove,
   }
 })();
 

@@ -1,3 +1,5 @@
+import { Player, Computer } from "./player";
+
 const PlayerManager = (() => {
   let _current;
   let _players = [];
@@ -21,6 +23,10 @@ const PlayerManager = (() => {
     return _current;
   }
 
+  function getPlayer() {
+    return (_players[0] instanceof Player) ? _players[0] : _players[1];
+  }
+
   function getNotCurrent() {
     return (_current === _players[0]) ? _players[1] : _players[0];
   }
@@ -28,6 +34,21 @@ const PlayerManager = (() => {
   function getPlayerPossibleAttacks(player) {
     // Finds the enemy player and gets the possible attacks from their gameboard
     return _players.find(_player => _player !== player).gameboard.getPossibleAttacks();
+  }
+
+  function getLastAttackAtEnemy() {
+    const enemy = getNotCurrent();
+    return enemy.gameboard.getLastAttack();
+  }
+
+  function checkLastAttackAtEnemyHitShip() {
+    const enemy = getNotCurrent();
+    return enemy.gameboard.lastAttackHitShip();
+  }
+
+  function checkLastAttackAtEnemySankShip() {
+    const enemy = getNotCurrent();
+    return enemy.gameboard.lastAttackSankShip();
   }
 
   function handleGameboardAttack(coordinates) {
@@ -38,11 +59,15 @@ const PlayerManager = (() => {
   return {
     setCurrent,
     getCurrent,
+    getPlayer,
     getNotCurrent,
     toggleCurrent,
     addPlayer,
     getPlayerPossibleAttacks,
-    handleGameboardAttack
+    handleGameboardAttack,
+    checkLastAttackAtEnemyHitShip,
+    checkLastAttackAtEnemySankShip,
+    getLastAttackAtEnemy
   }
 })();
 

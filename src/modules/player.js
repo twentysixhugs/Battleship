@@ -21,20 +21,48 @@ class Player {
 }
 
 class Computer extends Player {
+  #lastHitAtShip = null;
+
+  #tryingToSinkShip = false; // It will try to sink a ship if it hit it
+
+  #firstHitAtShip = null; // The very first ship's coordinate attacked
+
+  // If the ship is attacked twice, it will determine whether the ship is horizontal or vertical
+  #attackDirection = null;
+
+  #hitsAtShip = []; // All hits at the current ship that it is trying to attack and sink
+  #guessedShipPositions = []; // It will guess where the ship may be
+
   constructor() {
-    super('Computer');
-    this.lastHitAtShip = null;
-    this.tryingToSinkShip = false;
+    super();
   }
+
+  /* Getters and setters are for testing purposes only */
+
+  get lastHitAtShip() {
+    return this.#lastHitAtShip;
+  }
+
+  get tryingToSinkShip() {
+    return this.#tryingToSinkShip;
+  }
+
+  set lastHitAtShip(value) {
+    this.#lastHitAtShip = value;
+  }
+
+  set tryingToSinkShip(value) {
+    this.#tryingToSinkShip = value;
+  }
+
 
   makeMove() {
     const possibleAttacks = PlayerManager.getPlayerPossibleAttacks(this);
 
-    if (this.tryingToSinkShip) {
+    if (this.#tryingToSinkShip) {
       this.currentAttack = this.#getPotentialAttackToSinkShip(possibleAttacks);
     } else {
       this.currentAttack = this.#getRandomCoordinates(possibleAttacks);
-      // this.currentAttack = '1,1';
     }
 
     this.#attackInDOM(this.currentAttack);
@@ -45,16 +73,65 @@ class Computer extends Player {
     return possibleAttacks[Math.floor(Math.random() * possibleAttacks.length)];
   }
 
-  #getPotentialAttackToSinkShip(possibleAttacks) {
-    const potentialShipCells = stringifyElements(getPerpendicularCells(this.lastHitAtShip)); // Where there might be the attacked ship
+  #getPotentialAttackToSinkShip(allValidAttacks) {
+    if (this.#firstHitAtShip.toString() !== this.#lastHitAtShip.toString()) {
+      // if computer has already attacked a ship twice or more times,
+      // define the direction in which to attack next
+      this.#setAttackDirection();
+      this.#guessShipPositions();
 
-    possibleAttacks = stringifyElements(possibleAttacks);
+      const attacksToValidate = [
+        ...this.#guessedShipPositions,
+      ];
 
-    const notAttackedPotentialShipCells = potentialShipCells.filter(
-      cell => possibleAttacks.includes(cell)
-    );
+      allValidAttacks = stringifyElements(allValidAttacks);
 
-    return notAttackedPotentialShipCells[Math.floor(Math.random() * notAttackedPotentialShipCells.length)];
+      const validGuessedAttacks = attacksToValidate.filter(
+        attack => allValidAttacks.includes(attack.toString())
+      );
+
+      const nextAttack = validGuessedAttacks[Math.floor(Math.random() * validGuessedAttacks.length)];
+
+      return nextAttack;
+    } else {
+      const cellsWhereMayBeShip = getPerpendicularCells(this.#lastHitAtShip); // Where there might be a ship
+
+      allValidAttacks = stringifyElements(allValidAttacks);
+
+      const validCellsWhereMayBeShip = cellsWhereMayBeShip.filter(
+        cell => allValidAttacks.includes(cell.toString())
+      );
+
+      return validCellsWhereMayBeShip[Math.floor(Math.random() * validCellsWhereMayBeShip.length)];
+    }
+  }
+
+  #setAttackDirection() {
+    if (this.#firstHitAtShip[0] - this.#lastHitAtShip[0] === 0) {
+      this.#attackDirection = 'vertical';
+    }
+
+    if (this.#firstHitAtShip[1] - this.#lastHitAtShip[1] === 0) {
+      this.#attackDirection = 'horizontal';
+    }
+  }
+
+  #guessShipPositions() {
+    this.#hitsAtShip.forEach(hit => {
+      if (this.#attackDirection === 'vertical') {
+        this.#guessedShipPositions.push(
+          [Number(hit[0]), Number(hit[1]) - 1],
+          [Number(hit[0]), Number(hit[1]) + 1],
+        )
+      }
+
+      if (this.#attackDirection === 'horizontal') {
+        this.#guessedShipPositions.push(
+          [Number(hit[0]) - 1, Number(hit[1])],
+          [Number(hit[0]) + 1, Number(hit[1])],
+        )
+      }
+    })
   }
 
   #attackInDOM(attack) {
@@ -62,14 +139,32 @@ class Computer extends Player {
   }
 
   defineNextMove() {
-    const enemy = PlayerManager.getNotCurrent();
-    if (enemy.gameboard.lastAttackHitShip() && !enemy.gameboard.lastAttackSankShip()) {
-      this.tryingToSinkShip = true;
-      this.lastHitAtShip = enemy.gameboard.getLastAttack();
-    } else if (enemy.gameboard.lastAttackSankShip()) {
-      this.tryingToSinkShip = false;
-      this.lastHitAtShip = null;
+    if (
+      PlayerManager.checkLastAttackAtEnemyHitShip() && !PlayerManager.checkLastAttackAtEnemySankShip()
+    ) {
+      this.#defineNextMoveAsShipAttack();
+    } else if (PlayerManager.checkLastAttackAtEnemySankShip()) {
+      this.#defineNextMoveAsRandomAttack();
     }
+  }
+
+  #defineNextMoveAsShipAttack() {
+    const lastAttack = PlayerManager.getLastAttackAtEnemy();
+    if (!this.#lastHitAtShip) {
+      // if it is first attack at the ship (it wasn't attacked before and last hit is falsy)
+      this.#firstHitAtShip = lastAttack;
+    }
+    this.#tryingToSinkShip = true;
+    this.#lastHitAtShip = lastAttack;
+    this.#hitsAtShip.push(lastAttack);
+  }
+
+  #defineNextMoveAsRandomAttack() {
+    this.#tryingToSinkShip = false;
+    this.#lastHitAtShip = null;
+    this.#attackDirection = null;
+    this.#hitsAtShip = [];
+    this.#guessedShipPositions = [];
   }
 }
 
