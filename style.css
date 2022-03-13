@@ -153,11 +153,31 @@ button {
 }
 
 .gameboard__cell {
+  /* It will contain attack results as children. */
+  /* They should be centered */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+
   border: 1px solid black;
 }
 
-.gameboard__cell--attacked {
-  background: rgb(139, 0, 0);
+.gameboard__missed {
+  width: calc(var(--cell-size) / 4);
+  height: calc(var(--cell-size) / 4);
+
+  border-radius: 100%;
+  background: black;
+}
+
+.gameboard__hit {
+  width: calc(var(--cell-size) / 3);
+  height: calc(var(--cell-size) / 3);
+
+  transform: rotate(10deg);
+
+  background: rgb(172, 0, 0);
 }
 
 /* || Gameboard buttons */
