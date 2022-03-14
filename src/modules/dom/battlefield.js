@@ -24,6 +24,13 @@ function fillWithCells(battlefield, jsClassName) {
   }
 }
 
+function clearBattlefields() {
+  const playerBattlefield = document.querySelector('.js-player-battlefield');
+  const computerBattlefield = document.querySelector('.js-computer-battlefield');
+
+  playerBattlefield.textContent = "";
+  computerBattlefield.textContent = "";
+}
 
 function showMissedAttack(coordinate, enemy) {
   const missedAttackDiv = _createAttack('missed');
@@ -52,6 +59,7 @@ function _createAttack(attackResult) {
 
 export {
   fillBattlefieldsWithCells,
+  clearBattlefields,
   showMissedAttack,
   showHitAtShip,
   showSunkShip,
