@@ -294,6 +294,8 @@ button {
 .result {
   --result-width: calc(var(--cell-size) * 9);
   --result-height: calc(var(--cell-size) * 4.5);
+  z-index: 20;
+
   margin-bottom: 100px;
   display: flex;
 
