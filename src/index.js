@@ -1,12 +1,15 @@
 import {
   fillBattlefieldsWithCells,
   clearBattlefields,
+  showPlayerShips,
 } from "./modules/dom/battlefield";
 import { addEventsToStartMenuButtons } from "./modules/dom/start_menu";
 import { addRestartEvent } from "./modules/dom/restart";
+
 import UIGameState from "./modules/dom/game_state";
 import Game from "./modules/game";
 import Input from "./modules/input";
+import generateShipsForBothPlayers from "./modules/random_ships";
 
 (() => {
   initGame();
@@ -14,9 +17,12 @@ import Input from "./modules/input";
 })();
 
 function initGame() {
+  Input.clear();
   clearBattlefields();
   fillBattlefieldsWithCells();
-  addEventsToStartMenuButtons(receiveStart, receiveShuffle);
+  generateShipsForBothPlayers();
+  showPlayerShips();
+  addEventsToStartMenuButtons(receiveStart, receiveRandom);
 }
 
 function receiveStart() {
@@ -29,6 +35,6 @@ function receiveRestart() {
   initGame();
 }
 
-function receiveShuffle() {
+function receiveRandom() {
 
 }
