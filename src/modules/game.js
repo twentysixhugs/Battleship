@@ -61,7 +61,7 @@ const Game = (() => {
       }
 
       if (attacked.gameboard.checkLastAttackSankShip()) {
-        _attackCellsAroundSunkShip();
+        _attackCellsAroundSunkShip(attacked);
       }
 
       if (attacked.isGameOver()) {
@@ -92,7 +92,7 @@ const Game = (() => {
     computerShips.forEach(ship => computer.gameboard.placeShip(ship));
   }
 
-  function _attackCellsAroundSunkShip() {
+  function _attackCellsAroundSunkShip(attacked) {
     const sunkShip = attacked.gameboard.getLastAttackedShip();
 
     const cellsToAttack = getCellsSurroundingShip(sunkShip.getCoordinates());
