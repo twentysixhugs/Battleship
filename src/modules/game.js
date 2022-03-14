@@ -47,7 +47,7 @@ const Game = (() => {
       const attacker = PlayerManager.getCurrent();
       const attacked = PlayerManager.getNotCurrent();
 
-      if (!attacked.gameboard.ischeckLastAttackSuccessful()) {
+      if (!attacked.gameboard.checkLastAttackSuccessful()) {
         continue;
       }
 
