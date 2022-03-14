@@ -44,4 +44,8 @@ describe('ship placement validation', () => {
   })
 })
 
+test('validates when there are no ships on the battlefield', () => {
+  const ship = new Ship([2, 2], [2, 3], [2, 4], [2, 5]);
 
+  expect(validateShipPlacement(ship, [])).toBeTruthy();
+});
