@@ -50,7 +50,7 @@ const Game = (() => {
         continue;
       }
 
-      if (!attacked.gameboard.lastAttackHitShip()) {
+      if (!attacked.gameboard.checkLastAttackHitShip()) {
         PlayerManager.toggleCurrent();
         UIGameState.toggleCurrentPlayer();
         showMissedAttack(attacked.gameboard.getLastAttack(), attacked.name);

@@ -32,14 +32,14 @@ function Gameboard() {
     return _attacks[_attacks.length - 1];
   }
 
-  this.lastAttackHitShip = function () {
+  this.checkLastAttackHitShip = function () {
     const lastAttack = this.getLastAttack();
     const checkResult = _ships.find(ship => stringifyElements(ship.getCoordinates()).includes(lastAttack.toString()));
 
     return (checkResult) ? true : false;
   }
 
-  this.lastAttackSankShip = function () {
+  this.checkLastAttackSankShip = function () {
     const lastAttack = this.getLastAttack();
     const lastShipHit = _ships.find(ship => stringifyElements(ship.getCoordinates()).includes(lastAttack.toString()));
 

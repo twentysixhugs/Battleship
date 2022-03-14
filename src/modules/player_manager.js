@@ -39,12 +39,12 @@ const PlayerManager = (() => {
 
   function checkLastAttackAtEnemyHitShip() {
     const enemy = getNotCurrent();
-    return enemy.gameboard.lastAttackHitShip();
+    return enemy.gameboard.checkLastAttackHitShip();
   }
 
   function checkLastAttackAtEnemySankShip() {
     const enemy = getNotCurrent();
-    return enemy.gameboard.lastAttackSankShip();
+    return enemy.gameboard.checkLastAttackSankShip();
   }
 
   function handleGameboardAttack(coordinates) {
