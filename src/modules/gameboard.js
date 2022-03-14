@@ -32,6 +32,20 @@ function Gameboard() {
     return _attacks[_attacks.length - 1];
   }
 
+  this.getLastAttackedShip = function () {
+    const lastAttack = this.getLastAttack();
+
+    const lastAttackedShip =
+      _ships
+        .find(
+          ship => ship
+            .getCoordinates()
+            .some(coordinate => coordinate.toString() === lastAttack.toString())
+        );
+
+    return lastAttackedShip;
+  }
+
   this.checkLastAttackHitShip = function () {
     const lastAttack = this.getLastAttack();
     const checkResult = _ships.find(ship => stringifyElements(ship.getCoordinates()).includes(lastAttack.toString()));
@@ -83,18 +97,18 @@ function Gameboard() {
     return _ships.every(ship => ship.isSunk());
   }
 
-  this.checkLastAttackSuccessful = function () {
-    return _lastAttackSucessful;
-  }
+  let _lastAttackSuccessful;
 
-  let _lastAttackSucessful;
+  this.checkLastAttackSuccessful = function () {
+    return _lastAttackSuccessful;
+  }
 
   this.receiveAttack = function (attackCoordinate) {
     /* Check if it does not attack an already attacked coordinate */
     const attackCoordinateStr = attackCoordinate.toString();
 
     if (_isAttackingAlreadyAttackedCell(attackCoordinateStr)) {
-      _lastAttackSucessful = false;
+      _lastAttackSuccessful = false;
       return;
     }
 
@@ -104,14 +118,14 @@ function Gameboard() {
       for (const shipCoordinate of ship.getCoordinates()) {
         if (shipCoordinate.toString() === attackCoordinateStr) {
           hitShip(ship, ship.getCoordinates().indexOf(shipCoordinate)); // hit the ship at this position
-          _lastAttackSucessful = true;
+          _lastAttackSuccessful = true;
           return;
         }
       }
     }
 
     _placeMissedAttack(attackCoordinate);
-    _lastAttackSucessful = true;
+    _lastAttackSuccessful = true;
   }
 }
 
