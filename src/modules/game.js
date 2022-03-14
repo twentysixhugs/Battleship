@@ -99,10 +99,12 @@ const Game = (() => {
     cellsToAttack.forEach(cell => {
       attacked.gameboard.receiveAttack(cell);
 
-      if (attacked.gameboard.checkLastAttackSuccessfull()) {
-        showMissedAttack(cell);
+      if (attacked.gameboard.checkLastAttackSuccessful()) {
+        showMissedAttack(cell, PlayerManager.getPlayerName(attacked));
       }
     });
+
+    UIGameState.removeAllMoveListeners();
   }
 
   return {
