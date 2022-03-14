@@ -53,6 +53,8 @@ body {
 }
 
 body {
+  --cell-size: 2.2vw;
+
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -83,12 +85,12 @@ button {
 .heading {
   margin-top: 50px;
   font-size: 3rem;
+  margin-left: var(--cell-size);
 }
 
 /* || Game */
 
 .game {
-  --cell-size: 2.7vw;
   --button-height: calc(var(--cell-size) * 1.3);
   --button-width: calc(var(--cell-size) * 10 * 3 / 8);
 
@@ -103,8 +105,8 @@ button {
 
 .gameboard {
   display: none;
-  grid-template-rows: var(--cell-size) calc(var(--cell-size) * 10) calc(var(--cell-size) * 2);
-  grid-template-columns: var(--cell-size) calc(var(--cell-size) * 10 * 3 / 4) calc(var(--cell-size) * 10 * 1 / 4);
+  grid-template-rows: var(--cell-size) calc(var(--cell-size) * 10) calc(var(--cell-size) * 2) calc(var(--cell-size) * 2);
+  grid-template-columns: var(--cell-size) calc(var(--cell-size) * 10 * 3 / 5) 1fr;
 }
 
 .gameboard.is-visible {
@@ -152,6 +154,8 @@ button {
   border: 1px solid black;
 }
 
+/* || Gameboard cells */
+
 .gameboard__cell {
   /* It will contain attack results as children. */
   /* They should be centered */
@@ -182,16 +186,30 @@ button {
 
 /* || Gameboard buttons */
 
-.gameboard__buttons {
+.gameboard__btn {
   display: none;
-
-  grid-row: -2 / -1;
-  grid-column: 2 / 3;
   align-self: end;
+  justify-self: end;
 
-  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
 
-  width: 100%;
+.gameboard__btn.is-visible {
+  display: flex;
+}
+
+.gameboard__btn--random {
+  grid-row: 3 / 4;
+  grid-column: 3 / -1;
+}
+
+.gameboard__btn--start {
+  grid-row: 3 / 4;
+  grid-column: 2 / 3;
+
+  background: rgb(20, 29, 80);
+  color: white;
 }
 
 .gameboard__buttons.is-visible {
@@ -204,9 +222,16 @@ button {
 }
 
 .gameboard__description {
-  grid-row: -2 / -1;
+  grid-row: 3 / 4;
   grid-column: 2 / 4;
+  
   display: none;
+
+  font-size: calc(1rem + 4px);
+}
+
+.gameboard__description--player {
+  margin-right: calc(var(--cell-size) / 4);
 }
 
 .gameboard__description.is-visible {

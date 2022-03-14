@@ -39,41 +39,15 @@
         <span class="gameboard__coordinate">10</span>
       </div>
       <div class="gameboard__battlefield js-player-battlefield"></div>
-      <div class="gameboard__buttons js-gameboard-buttons is-visible">
-        <!-- The buttons are not clickable once they are hidden. The event listeners are removed -->
-        <button class="gameboard__btn js-random">Random</button>
-        <button class="gameboard__btn js-reset">Reset</button>
-      </div>
-      <div class="gameboard__description js-description">
-        Your board
-      </div>
-    </div>
-    <div class="port js-port is-visible">
-      <div class="port__ships">
-        <h2 class="port__heading">Drag and drop your ships</h2>
-        <div class="wrapper wrapper--ships js-ships--4">
-          <div class="ship ship--4 js-ship" data-id="ship-4-1" draggable="true"></div>
-        </div>
-        <div class="wrapper wrapper--ships-line js-ships--3">
-          <div class="ship ship--3 js-ship" data-id="ship-3-1" draggable="true"></div>
-          <div class="ship ship--3 js-ship" data-id="ship-3-2" draggable="true"></div>
-        </div>
-        <div class="wrapper wrapper--ships-line js-ships--2">
-          <div class="ship ship--2 js-ship" data-id="ship-2-1" draggable="true"></div>
-          <div class="ship ship--2 js-ship" data-id="ship-2-2" draggable="true"></div>
-          <div class="ship ship--2 js-ship" data-id="ship-2-3" draggable="true"></div>
-        </div>
-        <div class="wrapper wrapper--ships-line js-ships--1">
-          <div class="ship ship--1 js-ship" data-id="ship-1-1" draggable="true"></div>
-          <div class="ship ship--1 js-ship" data-id="ship-1-2" draggable="true"></div>
-          <div class="ship ship--1 js-ship" data-id="ship-1-3" draggable="true"></div>
-          <div class="ship ship--1 js-ship" data-id="ship-1-4" draggable="true"></div>
-        </div>
-      </div>
-      <!-- The buttons is not clickable once it is hidden. The event listener is removed -->
-      <button class="port__btn js-start">
+
+      <!-- The buttons are not clickable once they are hidden. The event listeners are removed -->
+      <button class="gameboard__btn gameboard__btn--random js-random is-visible">Shuffle</button>
+      <button class="gameboard__btn gameboard__btn--start js-start is-visible">
         Fight!
       </button>
+      <div class="gameboard__description gameboard__description--player js-description">
+        Your board
+      </div>
     </div>
     <div class="gameboard js-gameboard js-computer-gameboard">
       <div class="gameboard__coordinates gameboard__coordinates--letters">
@@ -103,14 +77,14 @@
       <div class="gameboard__coordinates"></div>
       <div class="gameboard__coordinates"></div>
       <div class="gameboard__battlefield js-computer-battlefield"></div>
-      <div class="gameboard__description js-description">
+      <div class="gameboard__description gameboard__description--computer js-description">
         Computer's board
       </div>
     </div>
     <div class="container--result js-container--result">
       <div class="result">
         <span class="result__message js-result"></span>
-        <button class="result__btn js-restart-btn">Restart</button>
+        <button class="result__btn js-restart">Restart</button>
       </div>
     </div>
   </div>
