@@ -2,28 +2,33 @@ import {
   fillBattlefieldsWithCells,
   clearBattlefields,
 } from "./modules/dom/battlefield";
-import { addEventsToButtons } from "./modules/dom/start_menu";
+import { addEventsToStartMenuButtons } from "./modules/dom/start_menu";
 import { addRestartEvent } from "./modules/dom/restart";
 import UIGameState from "./modules/dom/game_state";
 import Game from "./modules/game";
 import Input from "./modules/input";
 
 (() => {
-  fillBattlefieldsWithCells();
-  addEventsToButtons(receiveStart);
+  initGame();
   addRestartEvent(receiveRestart);
 })();
 
+function initGame() {
+  clearBattlefields();
+  fillBattlefieldsWithCells();
+  addEventsToStartMenuButtons(receiveStart, receiveShuffle);
+}
 
 function receiveStart() {
   Game.start();
 }
 
 function receiveRestart() {
-  clearBattlefields();
-  fillBattlefieldsWithCells();
-  addEventsToButtons(receiveStart);
-
   UIGameState.toggleResult();
   UIGameState.showRestart();
+  initGame();
+}
+
+function receiveShuffle() {
+
 }
