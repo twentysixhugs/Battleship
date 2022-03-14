@@ -39,6 +39,8 @@ function showMissedAttack(coordinate, enemy) {
   const missedAttackDiv = _createAttack('missed');
   const attackedCell = document.querySelector(`.js-cell--${enemy}[data-coordinate="${coordinate}"]`);
 
+  if (!attackedCell) return;
+
   attackedCell.appendChild(missedAttackDiv);
 }
 
