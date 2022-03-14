@@ -23,6 +23,10 @@ const PlayerManager = (() => {
     return _current;
   }
 
+  function getPlayerName(player) { // Need for DOM classes
+    return (player instanceof Computer) ? 'computer' : 'player';
+  }
+
   function getNotCurrent() {
     return (_current === _players[0]) ? _players[1] : _players[0];
   }
@@ -48,6 +52,8 @@ const PlayerManager = (() => {
   }
 
   function handleGameboardAttack(coordinates) {
+    if (!coordinates) return;
+
     const enemy = getNotCurrent();
     enemy.gameboard.receiveAttack(coordinates.split(','));
   }
@@ -56,6 +62,7 @@ const PlayerManager = (() => {
     setCurrent,
     getCurrent,
     getNotCurrent,
+    getPlayerName,
     toggleCurrent,
     addPlayer,
     getPlayerPossibleAttacks,
