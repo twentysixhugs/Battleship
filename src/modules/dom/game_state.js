@@ -16,7 +16,7 @@ const UIGameState = (() => {
   }
 
   function stopGame() {
-    _removeAllMoveListeners();
+    removeAllMoveListeners();
   }
 
   function showGameResult(isPlayerWinner) {
@@ -58,7 +58,7 @@ const UIGameState = (() => {
   /* And the move captured in this module will be handled */
 
   function playerMove(player) {
-    _removeAllMoveListeners();
+    removeAllMoveListeners();
 
     return new Promise((resolve, reject) => {
       _addMoveListenerForEnemyCells(resolve, '.js-cell--computer');
@@ -66,7 +66,7 @@ const UIGameState = (() => {
   }
 
   function computerMove(computer) {
-    _removeAllMoveListeners();
+    removeAllMoveListeners();
 
     return new Promise((resolve, reject) => {
       _addMoveListenerForEnemyCells(resolve, '.js-cell--player');
@@ -80,12 +80,13 @@ const UIGameState = (() => {
     const enemyCells = document.querySelectorAll(enemyCellsHTMLClass);
 
     enemyCells.forEach(cell => cell.addEventListener('click', (e) => {
+      if (!e.target.dataset.coordinate) return;
       PlayerManager.handleGameboardAttack(e.target.dataset.coordinate);
       promiseResolveCallback();
     }));
   }
 
-  function _removeAllMoveListeners() {
+  function removeAllMoveListeners() {
     const cellsWithListeners = document.querySelectorAll(`.js-cell--player, .js-cell--computer`);
 
     cellsWithListeners.forEach(cell => {
@@ -136,6 +137,7 @@ const UIGameState = (() => {
     playerMove,
     computerMove,
     showRestart,
+    removeAllMoveListeners,
   }
 })();
 
