@@ -147,16 +147,20 @@ button {
 .gameboard__battlefield {
   grid-row: 2 / -1;
   grid-column: 2 / -1;
+  
   display: grid;
   grid-template: repeat(10, 1fr) / repeat(10, 1fr);
+
   width: calc(var(--cell-size) * 10);
   height: calc(var(--cell-size) * 10); /* Viewport width, not height */
+
   border: 1px solid black;
 }
 
 /* || Gameboard cells */
 
 .gameboard__cell {
+  position: relative;
   /* It will contain attack results as children. */
   /* They should be centered */
   display: flex;
@@ -242,41 +246,12 @@ button {
   padding: 1rem;
 }
 
-/* || Port */
-
-.port {
-  padding-top: 10px;
-  display: none;
-  flex-flow: column;
-  justify-content: space-between;
-}
-
-.port.is-visible {
-  display: flex;
-}
-
-.port__heading {
-  height: var(--cell-size);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 24px;
-}
-
-.port__ships {
-  display: flex;
-  flex-flow: column;
-  gap: min(2rem, var(--cell-size));
-}
-
-.wrapper--ships-line {
-  display: flex;
-  gap: 1rem;
-}
-
 .ship {
-  border: 2px solid black;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  border: 2px solid rgb(0, 132, 255);
 }
 
 .ship--4 {
@@ -297,11 +272,6 @@ button {
 .ship--1 {
   width: calc(var(--cell-size) * 1);
   height: var(--cell-size);
-}
-
-.port__btn {
-  width: calc(var(--button-width) * 1.2);
-  height: calc(var(--button-height) * 1.2);
 }
 
 /* || Game result */ 
