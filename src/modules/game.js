@@ -5,6 +5,7 @@ import UIGameState from "./dom/game_state";
 import generateShipsForBothPlayers from "./random_ships";
 import { showHitAtShip, showMissedAttack, showSunkShip } from "./dom/battlefield";
 import { Computer, Player } from "./player";
+import { getCellsSurroundingShip } from "./helper";
 
 const Game = (() => {
   let _gameGoing = false;
@@ -46,16 +47,21 @@ const Game = (() => {
       const attacker = PlayerManager.getCurrent();
       const attacked = PlayerManager.getNotCurrent();
 
-      if (!attacked.gameboard.isLastAttackSuccessful()) {
+      if (!attacked.gameboard.ischeckLastAttackSuccessful()) {
         continue;
       }
 
       if (!attacked.gameboard.checkLastAttackHitShip()) {
+        /* If the last attack did not hit a ship */
         PlayerManager.toggleCurrent();
         UIGameState.toggleCurrentPlayer();
         showMissedAttack(attacked.gameboard.getLastAttack(), attacked.name);
       } else {
         showHitAtShip(attacked.gameboard.getLastAttack(), attacked.name);
+      }
+
+      if (attacked.gameboard.checkLastAttackSankShip()) {
+        _attackCellsAroundSunkShip();
       }
 
       if (attacked.isGameOver()) {
@@ -84,6 +90,19 @@ const Game = (() => {
 
     playerShips.forEach(ship => player.gameboard.placeShip(ship));
     computerShips.forEach(ship => computer.gameboard.placeShip(ship));
+  }
+
+  function _attackCellsAroundSunkShip() {
+    const sunkShip = attacked.gameboard.getLastAttackedShip();
+
+    const cellsToAttack = getCellsSurroundingShip(sunkShip.getCoordinates());
+    cellsToAttack.forEach(cell => {
+      attacked.gameboard.receiveAttack(cell);
+
+      if (attacked.gameboard.checkLastAttackSuccessfull()) {
+        showMissedAttack(cell);
+      }
+    });
   }
 
   return {
