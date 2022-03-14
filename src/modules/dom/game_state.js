@@ -5,10 +5,12 @@ const UIGameState = (() => {
   let _currentPlayer;
   let _isStartGame = true;
 
+  /* Game start */
+
   function startGame() {
     _currentPlayer = 'player';
-    _toggleStartGameInterface();
-    _showBothBattlefields();
+    _toggleStartGameInterfaceVisibility();
+    _disableStartGameInterface();
     _toggleBoardDescriptions();
     playerTurn();
   }
@@ -26,20 +28,27 @@ const UIGameState = (() => {
   }
 
   function _showPlayerVictory() {
-    _toggleResult();
+    toggleResult();
     const result = document.querySelector('.js-result');
     result.textContent = 'Victory!';
   }
 
   function _showPlayerDefeat() {
-    _toggleResult();
+    toggleResult();
     const result = document.querySelector('.js-result');
     result.textContent = 'Defeat!';
   }
 
-  function _toggleResult() {
+  function toggleResult() {
     const resultContainer = document.querySelector('.js-container--result');
     resultContainer.classList.toggle('is-visible');
+  }
+
+  /* Game restart */
+
+  function showRestart() {
+    _toggleStartGameInterfaceVisibility();
+    _toggleBoardDescriptions();
   }
 
   /* Player and computer move */
@@ -96,24 +105,8 @@ const UIGameState = (() => {
     }
   }
 
-  function _showBothBattlefields() {
-
-  }
-
-  function _toggleStartGameInterface() {
-    _toggleStartGameInterfaceVisibility();
-
-    if (_isStartGame) {
-      _disableStartGameInterface();
-      _isStartGame = false;
-    } else {
-      _enableStartGameInterface();
-      _isStartGame = true;
-    }
-  }
-
   function _disableStartGameInterface() {
-    const buttonsWithListeners = document.querySelectorAll('.js-random, js-reset, js-start');
+    const buttonsWithListeners = document.querySelectorAll('.js-random, .js-start');
 
     buttonsWithListeners.forEach(button => {
       let buttonWithoutListener = button.cloneNode(true);
@@ -121,18 +114,12 @@ const UIGameState = (() => {
     });
   }
 
-  function _enableStartGameInterface() {
-
-  }
-
   function _toggleStartGameInterfaceVisibility() {
-    const port = document.querySelector('.js-port');
     const computerGameboard = document.querySelector('.js-computer-gameboard');
-    const gameboardButtons = document.querySelector('.js-gameboard-buttons');
+    const gameboardButtons = document.querySelectorAll('.js-random, .js-start');
 
-    port.classList.toggle('is-visible');
     computerGameboard.classList.toggle('is-visible');
-    gameboardButtons.classList.toggle('is-visible');
+    gameboardButtons.forEach(button => button.classList.toggle('is-visible'));
   }
 
   function _toggleBoardDescriptions() {
@@ -144,9 +131,11 @@ const UIGameState = (() => {
     startGame,
     stopGame,
     showGameResult,
+    toggleResult,
     toggleCurrentPlayer,
     playerMove,
     computerMove,
+    showRestart,
   }
 })();
 
