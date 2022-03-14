@@ -1,13 +1,10 @@
-function addEventsToButtons(cbRandom, cbReset, cbStart) {
-  const random = document.querySelector('.js-random');
-  const reset = document.querySelector('.js-reset');
+function addEventsToStartMenuButtons(startCallback, randomCallback) {
   const start = document.querySelector('.js-start');
-
-  random.addEventListener('click', cbRandom);
-  reset.addEventListener('click', cbReset);
-  start.addEventListener('click', cbStart);
+  const random = document.querySelector('.js-random')
+  start.addEventListener('click', startCallback);
+  random.addEventListener('click', randomCallback);
 }
 
 export {
-  addEventsToButtons,
+  addEventsToStartMenuButtons,
 }
