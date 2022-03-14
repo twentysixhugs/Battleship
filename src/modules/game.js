@@ -44,16 +44,6 @@ const Game = (() => {
       const attacker = PlayerManager.getCurrent();
       const attacked = PlayerManager.getNotCurrent();
 
-
-      if (attacked.isGameOver()) {
-        _stop();
-        _winner = attacker;
-        console.log("winner: ", _winner);
-        UIGameState.stopGame();
-        UIGameState.showGameResult(_winner === player ? true : false);
-        break;
-      }
-
       if (!attacked.gameboard.isLastAttackSuccessful()) {
         continue;
       }
@@ -64,6 +54,15 @@ const Game = (() => {
         showMissedAttack(attacked.gameboard.getLastAttack(), attacked.name);
       } else {
         showHitAtShip(attacked.gameboard.getLastAttack(), attacked.name);
+      }
+
+      if (attacked.isGameOver()) {
+        _stop();
+        _winner = attacker;
+        console.log("winner: ", _winner);
+        UIGameState.stopGame();
+        UIGameState.showGameResult(_winner === player ? true : false);
+        break;
       }
     }
 
