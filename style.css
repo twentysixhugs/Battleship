@@ -67,10 +67,6 @@ button {
   cursor: pointer;
 }
 
-.ship {
-  cursor: pointer;
-}
-
 .port__heading,
 .heading,
 .gameboard__coordinate,
