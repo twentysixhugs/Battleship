@@ -51,8 +51,8 @@ function showHitAtShip(coordinate, enemy) {
   attackedCell.appendChild(shipAttackDiv);
 }
 
-function showSunkShip(coordinate) {
-
+function showSunkShip(coordinates, attackedPlayer) {
+  showShip(coordinates, attackedPlayer, true);
 }
 
 function _createAttack(attackResult) {
@@ -70,16 +70,20 @@ function showPlayerShips() {
       .getPlayerShips()
       .map(ship => ship.getCoordinates());
 
-  playerShipsCoordinates.forEach(showShip);
+  playerShipsCoordinates.forEach((coordinates) => showShip(coordinates, 'player'));
 }
 
-function showShip(coordinates) {
+function showShip(coordinates, player, isSunk) {
   const firstCoordinate = coordinates[0];
-  const cell = document.querySelector(`.js-cell[data-coordinate="${firstCoordinate}"]`);
+  const cell = document.querySelector(`.js-cell--${player}[data-coordinate="${firstCoordinate}"]`);
 
   const ship = document.createElement('div');
   ship.classList.add('ship', `ship--${coordinates.length}`);
   cell.appendChild(ship);
+
+  if (isSunk) {
+    ship.classList.add('ship--sunk');
+  }
 }
 
 export {
