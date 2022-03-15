@@ -52,7 +52,11 @@ function showHitAtShip(coordinate, enemy) {
 }
 
 function showSunkShip(coordinates, attackedPlayer) {
-  showShip(coordinates, attackedPlayer, true);
+  if (attackedPlayer === 'computer') {
+    showShip(coordinates, attackedPlayer);
+  }
+
+  setShipToSunk(coordinates, attackedPlayer);
 }
 
 function _createAttack(attackResult) {
@@ -73,17 +77,18 @@ function showPlayerShips() {
   playerShipsCoordinates.forEach((coordinates) => showShip(coordinates, 'player'));
 }
 
-function showShip(coordinates, player, isSunk) {
+function showShip(coordinates, player) {
   const firstCoordinate = coordinates[0];
   const cell = document.querySelector(`.js-cell--${player}[data-coordinate="${firstCoordinate}"]`);
 
   const ship = document.createElement('div');
   ship.classList.add('ship', `ship--${coordinates.length}`);
   cell.appendChild(ship);
+}
 
-  if (isSunk) {
-    ship.classList.add('ship--sunk');
-  }
+function setShipToSunk(coordinates, player) {
+  const ship = document.querySelector(`.js-cell--${player}[data-coordinate="${coordinates[0]}"] .ship`);
+  ship.classList.add('ship--sunk');
 }
 
 export {
