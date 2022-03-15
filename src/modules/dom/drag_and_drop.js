@@ -72,7 +72,6 @@ function onDragStart(e) {
 
 function onDragEnter(e) {
   e.preventDefault();
-  console.log('dragenter', e);
 }
 
 function onDragOver(e) {
