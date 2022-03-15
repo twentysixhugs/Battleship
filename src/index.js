@@ -8,7 +8,7 @@ import { addRestartEvent } from "./modules/dom/restart";
 
 import UIGameState from "./modules/dom/game_state";
 import Game from "./modules/game";
-import Input from "./modules/input";
+import Input from "./modules/utils/input";
 import generateShipsForBothPlayers from "./modules/random_ships";
 
 (() => {

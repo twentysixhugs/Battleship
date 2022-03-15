@@ -1,4 +1,4 @@
-import Input from "../input";
+import Input from "../utils/input";
 /* Cells generation and clearing */
 
 function fillBattlefieldsWithCells() {

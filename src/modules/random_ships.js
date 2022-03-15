@@ -2,7 +2,7 @@ import {
   validateRelativeShipPlacement, getValidPlacementCells
 } from "./ship_validator";
 
-import Input from "./input";
+import Input from "./utils/input";
 import Ship from "./ship";
 
 function generateShipsForBothPlayers() {

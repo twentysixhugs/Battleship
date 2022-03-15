@@ -1,5 +1,4 @@
-import { hitShip } from "./manager";
-import { stringifyElements } from "./helper"
+import { stringifyElements } from "./utils/helper"
 
 
 function Gameboard() {
@@ -117,7 +116,8 @@ function Gameboard() {
     for (const ship of _ships) {
       for (const shipCoordinate of ship.getCoordinates()) {
         if (shipCoordinate.toString() === attackCoordinateStr) {
-          hitShip(ship, ship.getCoordinates().indexOf(shipCoordinate)); // hit the ship at this position
+          // hitShip(ship, ship.getCoordinates().indexOf(shipCoordinate));
+          ship.hit(ship.getCoordinates().indexOf(shipCoordinate)); // hit the ship at this position
           _lastAttackSuccessful = true;
           return;
         }

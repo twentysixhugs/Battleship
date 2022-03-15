@@ -1,7 +1,7 @@
 import Gameboard from "./gameboard";
 import PlayerManager from "./player_manager";
-import { getPerpendicularCells } from "./helper";
-import { stringifyElements } from "./helper";
+import { getPerpendicularCells } from "./utils/helper";
+import { stringifyElements } from "./utils/helper";
 
 class Player {
   #gameboard;

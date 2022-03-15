@@ -1,11 +1,11 @@
 import PlayerManager from "./player_manager";
-import Input from "./input";
+import Input from "./utils/input";
 import Ship from "./ship";
 import UIGameState from "./dom/game_state";
 import generateShipsForBothPlayers from "./random_ships";
 import { showHitAtShip, showMissedAttack, showSunkShip } from "./dom/battlefield";
 import { Computer, Player } from "./player";
-import { getCellsSurroundingShip } from "./helper";
+import { getCellsSurroundingShip } from "./utils/helper";
 
 const Game = (() => {
   let _gameGoing = false;
