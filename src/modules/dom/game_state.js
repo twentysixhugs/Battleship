@@ -1,4 +1,3 @@
-import { playerTurn, computerTurn } from "./current_player";
 import PlayerManager from "../player_manager";
 
 const UIGameState = (() => {
@@ -12,7 +11,6 @@ const UIGameState = (() => {
     _toggleStartGameInterfaceVisibility();
     _disableStartGameInterface();
     _toggleBoardDescriptions();
-    playerTurn();
   }
 
   function stopGame() {
@@ -99,10 +97,8 @@ const UIGameState = (() => {
   function toggleCurrentPlayer() {
     if (_currentPlayer === 'player') {
       _currentPlayer = 'computer';
-      computerTurn();
     } else {
       _currentPlayer = 'player';
-      playerTurn();
     }
   }
 
