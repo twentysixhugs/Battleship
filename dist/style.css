@@ -254,6 +254,11 @@ button {
   background: #e4d6ff6c;
 }
 
+.ship--sunk {
+  border: 2px solid #ff0f0f;
+  background: #ffd6d66c;
+}
+
 .ship--4 {
   width: calc(var(--cell-size) * 4 - 2px);
   height: calc(var(--cell-size) - 2px);
