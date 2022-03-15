@@ -83,7 +83,13 @@ function showShip(coordinates, player) {
 
   const ship = document.createElement('div');
   ship.classList.add('ship', `ship--${coordinates.length}`);
+  ship.dataset.length = coordinates.length;
+
   cell.appendChild(ship);
+
+  if (player === 'player') {
+    ship.setAttribute('draggable', 'true');
+  }
 }
 
 function setShipToSunk(coordinates, player) {
