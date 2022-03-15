@@ -36,5 +36,9 @@ function receiveRestart() {
 }
 
 function receiveRandom() {
-
+  Input.clear();
+  clearBattlefields();
+  fillBattlefieldsWithCells();
+  generateShipsForBothPlayers();
+  showPlayerShips();
 }
