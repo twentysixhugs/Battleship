@@ -76,6 +76,10 @@ button {
   -webkit-user-select: none;
 }
 
+.drag-over {
+  background: rgb(184, 197, 255);
+}
+
 /* || Heading */
 
 .heading {
