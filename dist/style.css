@@ -145,6 +145,7 @@ button {
 /* || Battlefield */
 
 .gameboard__battlefield {
+  --cell-border-color: rgb(144, 121, 199);
   grid-row: 2 / -1;
   grid-column: 2 / -1;
   
@@ -154,8 +155,8 @@ button {
   width: calc(var(--cell-size) * 10);
   height: calc(var(--cell-size) * 10); /* Viewport width, not height */
 
-  border-left: 1px solid black;
-  border-bottom: 1px solid black;
+  border-left: 1px solid var(--cell-border-color);
+  border-bottom: 1px solid var(--cell-border-color);
 }
 
 /* || Gameboard cells */
@@ -169,8 +170,8 @@ button {
   align-items: center;
 
 
-  border-right: 1px solid black;
-  border-top: 1px solid black;
+  border-right: 1px solid var(--cell-border-color);
+  border-top: 1px solid var(--cell-border-color);
 }
 
 .gameboard__missed {
