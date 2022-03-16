@@ -76,7 +76,10 @@ const Game = (() => {
         _winner = attacker;
 
         UIGameState.stopGame();
-        UIGameState.showGameResult(_winner === player ? true : false);
+        setTimeout(() => {
+          UIGameState.showGameResult(_winner === player ? true : false);
+        }, 300);
+
         break;
       }
     }
