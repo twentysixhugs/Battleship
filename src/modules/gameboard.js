@@ -47,14 +47,18 @@ function Gameboard() {
 
   this.checkLastAttackHitShip = function () {
     const lastAttack = this.getLastAttack();
-    const checkResult = _ships.find(ship => stringifyElements(ship.getCoordinates()).includes(lastAttack.toString()));
+    const checkResult = _ships.find(
+      ship => stringifyElements(ship.getCoordinates()).includes(lastAttack.toString())
+    );
 
     return (checkResult) ? true : false;
   }
 
   this.checkLastAttackSankShip = function () {
     const lastAttack = this.getLastAttack();
-    const lastShipHit = _ships.find(ship => stringifyElements(ship.getCoordinates()).includes(lastAttack.toString()));
+    const lastShipHit = _ships.find(
+      ship => stringifyElements(ship.getCoordinates()).includes(lastAttack.toString())
+    );
 
     return lastShipHit ? lastShipHit.isSunk() : false;
   }
