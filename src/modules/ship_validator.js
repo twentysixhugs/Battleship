@@ -1,19 +1,36 @@
 import { getCellsSurroundingShip, stringifyElements } from './utils/helper';
 
 /* The purpose of this module is to not allow to place ships */
-/* Adjacent to each other. There must be some space between them */
+/* adjacent to each other and outside the gameboard. */
+/* There must be some space between them */
 
 /* First, it defines whether or not the placement is valid relative to other ships on board */
-/* Second, it checks whether or not the coordinates are not outside the battlefield */
+/* Second, it checks whether or not the coordinates are not outside the gameboard */
 
-function validateRelativeShipPlacement(validatedShip, ships) {
+function validateShipPlacement(validatedShip, allShips) {
+  const shipCoordinates = validatedShip.getCoordinates();
+  const shipLength = shipCoordinates.length;
+  const firstCoordinate = shipCoordinates[0];
+
+  const isValidRelative = validateRelativeShipPlacement(validatedShip, allShips);
+  const isInside = !isOutsideGameboard(shipLength, firstCoordinate);
+
+  const isValid = isValidRelative && isInside;
+
+  return isValid;
+}
+
+export default validateShipPlacement;
+
+
+function validateRelativeShipPlacement(validatedShip, allShips) {
   /* Validate against other ships */
 
   const shipCells =
     stringifyElements(validatedShip.getCoordinates());
 
   const adjacentShipCoordinates =
-    stringifyElements(getAdjacentShipCoordinates(ships));
+    stringifyElements(getAdjacentShipCoordinates(allShips));
 
   if (shipCells.some(cell => adjacentShipCoordinates.includes(cell))) {
     return false;
@@ -23,20 +40,34 @@ function validateRelativeShipPlacement(validatedShip, ships) {
 }
 
 
-function getAdjacentShipCoordinates(ships) {
-  const adjacentShipCoordinates = ships
+function getAdjacentShipCoordinates(allShips) {
+  const adjacentShipCoordinates = allShips
     .map(ship => {
       const shipCoordinates = ship.getCoordinates();
       return getCellsSurroundingShip(shipCoordinates);
     })
     .flat();
 
-  ships.forEach(ship => {
+  allShips.forEach(ship => {
     const shipCoordinates = ship.getCoordinates();
-    shipCoordinates.forEach(coordinate => adjacentShipCoordinates.push(stringifyElements(coordinate)));
+    shipCoordinates.forEach(coordinate =>
+      adjacentShipCoordinates
+        .push(stringifyElements(coordinate)));
   });
 
   return adjacentShipCoordinates;
+}
+
+function isOutsideGameboard(validatedShipLength, firstCoordinate) {
+  const validCells = getValidPlacementCells(validatedShipLength);
+  const isPlacementInvalid = validCells
+    .every(cell => cell.toString() !== firstCoordinate.toString());
+
+  if (isPlacementInvalid) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function getValidPlacementCells(validatedShipLength) {
@@ -68,7 +99,7 @@ function getCellsValidForShipFour() {
   const validCells = [];
 
   for (let x = 1; x <= 7; x++) {
-    for (let y = 1; y < 10; y++) {
+    for (let y = 1; y <= 10; y++) {
       validCells.push([x, y]);
     }
   }
@@ -80,7 +111,7 @@ function getCellsValidForShipThree() {
   const validCells = [];
 
   for (let x = 1; x <= 8; x++) {
-    for (let y = 1; y < 10; y++) {
+    for (let y = 1; y <= 10; y++) {
       validCells.push([x, y]);
     }
   }
