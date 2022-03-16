@@ -10,7 +10,6 @@ import UIGameState from "./modules/dom/game_state";
 import Game from "./modules/game";
 import Input from "./modules/utils/input";
 import generateShipsForBothPlayers from "./modules/random_ships";
-import initDragAndDrop from "./modules/dom/drag_and_drop";
 
 (() => {
   initGame();
@@ -19,11 +18,13 @@ import initDragAndDrop from "./modules/dom/drag_and_drop";
 
 function initGame() {
   Input.clear();
+  /* Update battlefields */
   clearBattlefields();
   fillBattlefieldsWithCells();
+
   generateShipsForBothPlayers();
   showPlayerShips();
-  initDragAndDrop();
+
   addEventsToStartMenuButtons(receiveStart, receiveRandom);
 }
 
@@ -43,5 +44,4 @@ function receiveRandom() {
   fillBattlefieldsWithCells();
   generateShipsForBothPlayers();
   showPlayerShips();
-  initDragAndDrop();
 }
