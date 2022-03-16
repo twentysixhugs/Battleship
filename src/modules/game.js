@@ -55,6 +55,7 @@ const Game = (() => {
         /* If the last attack did not hit a ship */
         PlayerManager.toggleCurrent();
         UIGameState.toggleCurrentPlayer();
+
         showMissedAttack(attacked.gameboard.getLastAttack(), attacked.name);
       } else {
         showHitAtShip(attacked.gameboard.getLastAttack(), attacked.name);
