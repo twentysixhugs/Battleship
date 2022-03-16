@@ -54,11 +54,14 @@ body {
 
 body {
   --cell-size: 2.2vw;
+  --system-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
   display: flex;
   flex-flow: column;
   align-items: center;
   gap: 50px;
+
+  font-family: 'Alegreya Sans SC', sans-serif, var(--system-font);
 }
 
 /* || Utils */
@@ -76,16 +79,13 @@ button {
   -webkit-user-select: none;
 }
 
-.drag-over {
-  background: rgb(184, 197, 255);
-}
-
 /* || Heading */
 
 .heading {
   margin-top: 50px;
-  font-size: 3rem;
   margin-left: var(--cell-size);
+
+  font-size: 3rem;
 }
 
 /* || Game */
@@ -199,6 +199,8 @@ button {
 
   justify-content: center;
   align-items: center;
+
+  font-family: sans-serif, var(--system-font);
 }
 
 .gameboard__btn.is-visible {
