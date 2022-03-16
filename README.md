@@ -13,5 +13,5 @@
 ## How to play?
 - Your ships are already randomly placed. If you want to, you can shuffle them once again.
 - Once the game has started, you need to guess where the computer's ships are and attack them. So does the computer.
-- When you hit a ship, you can try to sink it. The one who destroy all the opponent's ships wins the game.
+- When you hit a ship, you can try to sink it (You have an extra move). The one who destroyes all the opponent's ships wins the game.
 - Remember, the computer is not stupid, it will try to sink your ship after hitting it as was mentioned before.
