@@ -197,6 +197,10 @@ button {
 
 .gameboard__btn {
   display: none;
+
+  width: var(--button-width);
+  height: var(--button-height);
+
   align-self: end;
   justify-self: end;
 
@@ -208,6 +212,7 @@ button {
 
   border-radius: 12px;
   background: #250786;
+  color: white;
 }
 
 .gameboard__btn:hover {
@@ -221,8 +226,6 @@ button {
 .gameboard__btn--random {
   grid-row: 3 / 4;
   grid-column: 3 / -1;
-
-  color: white;
 }
 
 .gameboard__btn--start {
@@ -234,11 +237,6 @@ button {
 
 .gameboard__buttons.is-visible {
   display: flex;
-}
-
-.gameboard__btn {
-  width: var(--button-width);
-  height: var(--button-height);
 }
 
 .gameboard__description {
@@ -301,6 +299,7 @@ button {
 
 .container--result {
   position: absolute;
+  z-index: 10;
 
   display: none;
   width: 100%;
@@ -337,7 +336,7 @@ button {
 
 .result__message {
   padding: calc(var(--cell-size) / 2);
-  font-size: calc(var(--cell-size) / 1.3);
+  font-size: max(var(--cell-size) * 1.5, 2rem);
 
   text-align: center;
 }
@@ -345,4 +344,14 @@ button {
 .result__btn {
   width: calc(var(--result-width) * 1 / 2);
   height: calc(var(--cell-size) * 1.5);
+
+  font-size: calc(1rem + 6px);
+
+  border-radius: 12px;
+  background: #250786;
+  color: white;
+}
+
+.result__btn:hover {
+  background: #2a089b;
 }
