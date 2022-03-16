@@ -1,4 +1,4 @@
-import PlayerManager from "../player_manager";
+import PlayerManager from '../player_manager';
 
 const UIGameState = (() => {
   let _currentPlayer;
@@ -74,25 +74,31 @@ const UIGameState = (() => {
     });
   }
 
-  function _addMoveListenerForEnemyCells(promiseResolveCallback, enemyCellsHTMLClass) {
+  function _addMoveListenerForEnemyCells(
+    promiseResolveCallback,
+    enemyCellsHTMLClass,
+  ) {
     const enemyCells = document.querySelectorAll(enemyCellsHTMLClass);
 
-    enemyCells.forEach(cell => cell.addEventListener('click', (e) => {
-      if (!e.target.dataset.coordinate) return;
-      PlayerManager.handleGameboardAttack(e.target.dataset.coordinate);
-      promiseResolveCallback();
-    }));
+    enemyCells.forEach((cell) =>
+      cell.addEventListener('click', (e) => {
+        if (!e.target.dataset.coordinate) return;
+        PlayerManager.handleGameboardAttack(e.target.dataset.coordinate);
+        promiseResolveCallback();
+      }),
+    );
   }
 
   function removeAllMoveListeners() {
-    const cellsWithListeners = document.querySelectorAll(`.js-cell--player, .js-cell--computer`);
+    const cellsWithListeners = document.querySelectorAll(
+      `.js-cell--player, .js-cell--computer`,
+    );
 
-    cellsWithListeners.forEach(cell => {
+    cellsWithListeners.forEach((cell) => {
       let cellWithoutListener = cell.cloneNode(true);
       cell.parentNode.replaceChild(cellWithoutListener, cell);
     });
   }
-
 
   function toggleCurrentPlayer() {
     if (_currentPlayer === 'player') {
@@ -105,7 +111,7 @@ const UIGameState = (() => {
   function _disableStartGameInterface() {
     const buttonsWithListeners = document.querySelectorAll('.js-random, .js-start');
 
-    buttonsWithListeners.forEach(button => {
+    buttonsWithListeners.forEach((button) => {
       let buttonWithoutListener = button.cloneNode(true);
       button.parentNode.replaceChild(buttonWithoutListener, button);
     });
@@ -116,12 +122,12 @@ const UIGameState = (() => {
     const gameboardButtons = document.querySelectorAll('.js-random, .js-start');
 
     computerGameboard.classList.toggle('is-visible');
-    gameboardButtons.forEach(button => button.classList.toggle('is-visible'));
+    gameboardButtons.forEach((button) => button.classList.toggle('is-visible'));
   }
 
   function _toggleBoardDescriptions() {
     const descriptions = document.querySelectorAll('.js-description');
-    descriptions.forEach(node => node.classList.toggle('is-visible'));
+    descriptions.forEach((node) => node.classList.toggle('is-visible'));
   }
 
   return {
@@ -134,7 +140,7 @@ const UIGameState = (() => {
     computerMove,
     showRestart,
     removeAllMoveListeners,
-  }
+  };
 })();
 
 export default UIGameState;

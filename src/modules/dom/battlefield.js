@@ -1,4 +1,4 @@
-import Input from "../utils/input";
+import Input from '../utils/input';
 /* Cells generation and clearing */
 
 function fillBattlefieldsWithCells() {
@@ -29,15 +29,17 @@ function clearBattlefields() {
   const playerBattlefield = document.querySelector('.js-player-battlefield');
   const computerBattlefield = document.querySelector('.js-computer-battlefield');
 
-  playerBattlefield.textContent = "";
-  computerBattlefield.textContent = "";
+  playerBattlefield.textContent = '';
+  computerBattlefield.textContent = '';
 }
 
 /* Response to attack */
 
 function showMissedAttack(coordinate, enemy) {
   const missedAttackDiv = _createAttack('missed');
-  const attackedCell = document.querySelector(`.js-cell--${enemy}[data-coordinate="${coordinate}"]`);
+  const attackedCell = document.querySelector(
+    `.js-cell--${enemy}[data-coordinate="${coordinate}"]`,
+  );
 
   if (!attackedCell) return;
 
@@ -46,7 +48,9 @@ function showMissedAttack(coordinate, enemy) {
 
 function showHitAtShip(coordinate, enemy) {
   const shipAttackDiv = _createAttack('hit');
-  const attackedCell = document.querySelector(`.js-cell--${enemy}[data-coordinate="${coordinate}"]`);
+  const attackedCell = document.querySelector(
+    `.js-cell--${enemy}[data-coordinate="${coordinate}"]`,
+  );
 
   attackedCell.appendChild(shipAttackDiv);
 }
@@ -69,17 +73,18 @@ function _createAttack(attackResult) {
 /* Ships highlighting */
 
 function showPlayerShips() {
-  const playerShipsCoordinates =
-    Input
-      .getPlayerShips()
-      .map(ship => ship.getCoordinates());
+  const playerShipsCoordinates = Input.getPlayerShips().map((ship) =>
+    ship.getCoordinates(),
+  );
 
   playerShipsCoordinates.forEach((coordinates) => showShip(coordinates, 'player'));
 }
 
 function showShip(coordinates, player) {
   const firstCoordinate = coordinates[0];
-  const cell = document.querySelector(`.js-cell--${player}[data-coordinate="${firstCoordinate}"]`);
+  const cell = document.querySelector(
+    `.js-cell--${player}[data-coordinate="${firstCoordinate}"]`,
+  );
 
   const ship = document.createElement('div');
   ship.classList.add('ship', `ship--${coordinates.length}`);
@@ -89,7 +94,9 @@ function showShip(coordinates, player) {
 }
 
 function setShipToSunk(coordinates, player) {
-  const ship = document.querySelector(`.js-cell--${player}[data-coordinate="${coordinates[0]}"] .ship`);
+  const ship = document.querySelector(
+    `.js-cell--${player}[data-coordinate="${coordinates[0]}"] .ship`,
+  );
   ship.classList.add('ship--sunk');
 }
 
@@ -101,4 +108,4 @@ export {
   showSunkShip,
   showPlayerShips,
   showShip,
-}
+};

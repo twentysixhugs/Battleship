@@ -1,4 +1,4 @@
-import { convertElementsToNumbers } from "./helper";
+import { convertElementsToNumbers } from './helper';
 
 const Input = (() => {
   let _lastMove;
@@ -36,8 +36,8 @@ const Input = (() => {
     getPlayerShips,
     getComputerShips,
     placeShips,
-    clear
-  }
+    clear,
+  };
 })();
 
 export default Input;

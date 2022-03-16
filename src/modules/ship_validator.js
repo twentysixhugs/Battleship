@@ -22,37 +22,35 @@ function validateShipPlacement(validatedShip, allShips) {
 
 export default validateShipPlacement;
 
-
 function validateRelativeShipPlacement(validatedShip, allShips) {
   /* Validate against other ships */
 
-  const shipCells =
-    stringifyElements(validatedShip.getCoordinates());
+  const shipCells = stringifyElements(validatedShip.getCoordinates());
 
-  const adjacentShipCoordinates =
-    stringifyElements(getAdjacentShipCoordinates(allShips));
+  const adjacentShipCoordinates = stringifyElements(
+    getAdjacentShipCoordinates(allShips),
+  );
 
-  if (shipCells.some(cell => adjacentShipCoordinates.includes(cell))) {
+  if (shipCells.some((cell) => adjacentShipCoordinates.includes(cell))) {
     return false;
   }
 
   return true;
 }
 
-
 function getAdjacentShipCoordinates(allShips) {
   const adjacentShipCoordinates = allShips
-    .map(ship => {
+    .map((ship) => {
       const shipCoordinates = ship.getCoordinates();
       return getCellsSurroundingShip(shipCoordinates);
     })
     .flat();
 
-  allShips.forEach(ship => {
+  allShips.forEach((ship) => {
     const shipCoordinates = ship.getCoordinates();
-    shipCoordinates.forEach(coordinate =>
-      adjacentShipCoordinates
-        .push(stringifyElements(coordinate)));
+    shipCoordinates.forEach((coordinate) =>
+      adjacentShipCoordinates.push(stringifyElements(coordinate)),
+    );
   });
 
   return adjacentShipCoordinates;
@@ -60,8 +58,9 @@ function getAdjacentShipCoordinates(allShips) {
 
 function isOutsideGameboard(validatedShipLength, firstCoordinate) {
   const validCells = getValidPlacementCells(validatedShipLength);
-  const isPlacementInvalid = validCells
-    .every(cell => cell.toString() !== firstCoordinate.toString());
+  const isPlacementInvalid = validCells.every(
+    (cell) => cell.toString() !== firstCoordinate.toString(),
+  );
 
   if (isPlacementInvalid) {
     return true;
@@ -143,5 +142,4 @@ function getAllBoard() {
   return allBoard;
 }
 
-
-export { validateRelativeShipPlacement, getValidPlacementCells }
+export { validateRelativeShipPlacement, getValidPlacementCells };

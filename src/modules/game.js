@@ -1,11 +1,11 @@
-import PlayerManager from "./player_manager";
-import Input from "./utils/input";
-import Ship from "./ship";
-import UIGameState from "./dom/game_state";
-import generateShipsForBothPlayers from "./random_ships";
-import { showHitAtShip, showMissedAttack, showSunkShip } from "./dom/battlefield";
-import { Computer, Player } from "./player";
-import { getCellsSurroundingShip } from "./utils/helper";
+import PlayerManager from './player_manager';
+import Input from './utils/input';
+import Ship from './ship';
+import UIGameState from './dom/game_state';
+import generateShipsForBothPlayers from './random_ships';
+import { showHitAtShip, showMissedAttack, showSunkShip } from './dom/battlefield';
+import { Computer, Player } from './player';
+import { getCellsSurroundingShip } from './utils/helper';
 
 const Game = (() => {
   let _gameGoing = false;
@@ -65,7 +65,10 @@ const Game = (() => {
         const sunkShip = attacked.gameboard.getLastAttackedShip();
 
         _attackCellsAroundSunkShip(attacked, sunkShip);
-        showSunkShip(sunkShip.getCoordinates(), PlayerManager.getPlayerName(attacked));
+        showSunkShip(
+          sunkShip.getCoordinates(),
+          PlayerManager.getPlayerName(attacked),
+        );
       }
 
       if (attacked.isGameOver()) {
@@ -81,8 +84,7 @@ const Game = (() => {
     async function nextMove() {
       if (PlayerManager.getCurrent() === player) {
         await UIGameState.playerMove(player);
-      }
-      else if (PlayerManager.getCurrent() === computer) {
+      } else if (PlayerManager.getCurrent() === computer) {
         await UIGameState.computerMove(computer);
       }
     }
@@ -92,13 +94,13 @@ const Game = (() => {
     const playerShips = Input.getPlayerShips();
     const computerShips = Input.getComputerShips();
 
-    playerShips.forEach(ship => player.gameboard.placeShip(ship));
-    computerShips.forEach(ship => computer.gameboard.placeShip(ship));
+    playerShips.forEach((ship) => player.gameboard.placeShip(ship));
+    computerShips.forEach((ship) => computer.gameboard.placeShip(ship));
   }
 
   function _attackCellsAroundSunkShip(attacked, sunkShip) {
     const cellsToAttack = getCellsSurroundingShip(sunkShip.getCoordinates());
-    cellsToAttack.forEach(cell => {
+    cellsToAttack.forEach((cell) => {
       attacked.gameboard.receiveAttack(cell);
 
       if (attacked.gameboard.checkLastAttackSuccessful()) {
@@ -111,7 +113,7 @@ const Game = (() => {
 
   return {
     start,
-  }
+  };
 })();
 
 export default Game;

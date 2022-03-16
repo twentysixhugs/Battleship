@@ -1,7 +1,7 @@
-import Gameboard from "./gameboard";
-import PlayerManager from "./player_manager";
-import { getPerpendicularCells } from "./utils/helper";
-import { stringifyElements } from "./utils/helper";
+import Gameboard from './gameboard';
+import PlayerManager from './player_manager';
+import { getPerpendicularCells } from './utils/helper';
+import { stringifyElements } from './utils/helper';
 
 class Player {
   #gameboard;
@@ -61,7 +61,6 @@ class Computer extends Player {
     this.#tryingToSinkShip = value;
   }
 
-
   makeMove() {
     const possibleAttacks = PlayerManager.getPlayerPossibleAttacks(this);
 
@@ -86,17 +85,16 @@ class Computer extends Player {
       this.#setAttackDirection();
       this.#guessShipPositions();
 
-      const attacksToValidate = [
-        ...this.#guessedShipPositions,
-      ];
+      const attacksToValidate = [...this.#guessedShipPositions];
 
       allValidAttacks = stringifyElements(allValidAttacks);
 
-      const validGuessedAttacks = attacksToValidate.filter(
-        attack => allValidAttacks.includes(attack.toString())
+      const validGuessedAttacks = attacksToValidate.filter((attack) =>
+        allValidAttacks.includes(attack.toString()),
       );
 
-      const nextAttack = validGuessedAttacks[Math.floor(Math.random() * validGuessedAttacks.length)];
+      const nextAttack =
+        validGuessedAttacks[Math.floor(Math.random() * validGuessedAttacks.length)];
 
       return nextAttack;
     } else {
@@ -104,11 +102,13 @@ class Computer extends Player {
 
       allValidAttacks = stringifyElements(allValidAttacks);
 
-      const validCellsWhereMayBeShip = cellsWhereMayBeShip.filter(
-        cell => allValidAttacks.includes(cell.toString())
+      const validCellsWhereMayBeShip = cellsWhereMayBeShip.filter((cell) =>
+        allValidAttacks.includes(cell.toString()),
       );
 
-      return validCellsWhereMayBeShip[Math.floor(Math.random() * validCellsWhereMayBeShip.length)];
+      return validCellsWhereMayBeShip[
+        Math.floor(Math.random() * validCellsWhereMayBeShip.length)
+      ];
     }
   }
 
@@ -123,21 +123,21 @@ class Computer extends Player {
   }
 
   #guessShipPositions() {
-    this.#hitsAtShip.forEach(hit => {
+    this.#hitsAtShip.forEach((hit) => {
       if (this.#attackDirection === 'vertical') {
         this.#guessedShipPositions.push(
           [Number(hit[0]), Number(hit[1]) - 1],
           [Number(hit[0]), Number(hit[1]) + 1],
-        )
+        );
       }
 
       if (this.#attackDirection === 'horizontal') {
         this.#guessedShipPositions.push(
           [Number(hit[0]) - 1, Number(hit[1])],
           [Number(hit[0]) + 1, Number(hit[1])],
-        )
+        );
       }
-    })
+    });
   }
 
   #attackInDOM(attack) {
@@ -146,7 +146,8 @@ class Computer extends Player {
 
   defineNextMove() {
     if (
-      PlayerManager.checkLastAttackAtEnemyHitShip() && !PlayerManager.checkLastAttackAtEnemySankShip()
+      PlayerManager.checkLastAttackAtEnemyHitShip() &&
+      !PlayerManager.checkLastAttackAtEnemySankShip()
     ) {
       this.#defineNextMoveAsShipAttack();
     } else if (PlayerManager.checkLastAttackAtEnemySankShip()) {
@@ -174,5 +175,4 @@ class Computer extends Player {
   }
 }
 
-
-export { Player, Computer }
+export { Player, Computer };

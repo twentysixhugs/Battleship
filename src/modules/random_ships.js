@@ -1,9 +1,10 @@
 import {
-  validateRelativeShipPlacement, getValidPlacementCells
-} from "./ship_validator";
+  validateRelativeShipPlacement,
+  getValidPlacementCells,
+} from './ship_validator';
 
-import Input from "./utils/input";
-import Ship from "./ship";
+import Input from './utils/input';
+import Ship from './ship';
 
 function generateShipsForBothPlayers() {
   generateShipsRandomly();
@@ -11,8 +12,7 @@ function generateShipsForBothPlayers() {
 }
 
 function generateShipsRandomly() {
-  const readyShips = [
-  ];
+  const readyShips = [];
 
   const carrier = getValidShip(4, readyShips);
   readyShips.push(carrier);
@@ -54,7 +54,8 @@ function generateShip(shipLength) {
 
   const shipCoordinates = [[...firstCoordinate]];
 
-  for (let i = 1; i < shipLength; i++) { // go from the second coordinate
+  for (let i = 1; i < shipLength; i++) {
+    // go from the second coordinate
     shipCoordinates.push([coordinateX + i, coordinateY]);
   }
 
@@ -62,4 +63,4 @@ function generateShip(shipLength) {
 }
 
 export default generateShipsForBothPlayers;
-export { generateShipsRandomly }
+export { generateShipsRandomly };

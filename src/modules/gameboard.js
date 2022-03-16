@@ -1,5 +1,4 @@
-import { stringifyElements } from "./utils/helper"
-
+import { stringifyElements } from './utils/helper';
 
 function Gameboard() {
   const _length = 10; // 10 x 10 board
@@ -9,59 +8,59 @@ function Gameboard() {
 
   this.getLength = function () {
     return _length;
-  }
+  };
 
   this.getShips = function () {
     return [..._ships];
-  }
+  };
 
   this.getMissedAttacks = function () {
     return [..._missedAttacks];
-  }
+  };
 
   this.getAllAttacks = function () {
     return [..._attacks];
-  }
+  };
 
   this.getPossibleAttacks = function () {
-    return this.getAllCells().filter(cell => !stringifyElements(_attacks).includes(cell.toString()));
-  }
+    return this.getAllCells().filter(
+      (cell) => !stringifyElements(_attacks).includes(cell.toString()),
+    );
+  };
 
   this.getLastAttack = function () {
     return _attacks[_attacks.length - 1];
-  }
+  };
 
   this.getLastAttackedShip = function () {
     const lastAttack = this.getLastAttack();
 
-    const lastAttackedShip =
-      _ships
-        .find(
-          ship => ship
-            .getCoordinates()
-            .some(coordinate => coordinate.toString() === lastAttack.toString())
-        );
+    const lastAttackedShip = _ships.find((ship) =>
+      ship
+        .getCoordinates()
+        .some((coordinate) => coordinate.toString() === lastAttack.toString()),
+    );
 
     return lastAttackedShip;
-  }
+  };
 
   this.checkLastAttackHitShip = function () {
     const lastAttack = this.getLastAttack();
-    const checkResult = _ships.find(
-      ship => stringifyElements(ship.getCoordinates()).includes(lastAttack.toString())
+    const checkResult = _ships.find((ship) =>
+      stringifyElements(ship.getCoordinates()).includes(lastAttack.toString()),
     );
 
-    return (checkResult) ? true : false;
-  }
+    return checkResult ? true : false;
+  };
 
   this.checkLastAttackSankShip = function () {
     const lastAttack = this.getLastAttack();
-    const lastShipHit = _ships.find(
-      ship => stringifyElements(ship.getCoordinates()).includes(lastAttack.toString())
+    const lastShipHit = _ships.find((ship) =>
+      stringifyElements(ship.getCoordinates()).includes(lastAttack.toString()),
     );
 
     return lastShipHit ? lastShipHit.isSunk() : false;
-  }
+  };
 
   this.getAllCells = function () {
     const allCells = [];
@@ -73,8 +72,7 @@ function Gameboard() {
     }
 
     return [...allCells];
-  }
-
+  };
 
   function _placeMissedAttack(attackCoordinate) {
     _missedAttacks.push(attackCoordinate);
@@ -94,17 +92,17 @@ function Gameboard() {
 
   this.placeShip = function (ship) {
     _ships.push(ship);
-  }
+  };
 
   this.areAllShipsSunk = function () {
-    return _ships.every(ship => ship.isSunk());
-  }
+    return _ships.every((ship) => ship.isSunk());
+  };
 
   let _lastAttackSuccessful;
 
   this.checkLastAttackSuccessful = function () {
     return _lastAttackSuccessful;
-  }
+  };
 
   this.receiveAttack = function (attackCoordinate) {
     /* Check if it does not attack an already attacked coordinate */
@@ -130,7 +128,7 @@ function Gameboard() {
 
     _placeMissedAttack(attackCoordinate);
     _lastAttackSuccessful = true;
-  }
+  };
 }
 
 export default Gameboard;

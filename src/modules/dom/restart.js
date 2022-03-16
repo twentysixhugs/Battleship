@@ -3,6 +3,4 @@ function addRestartEvent(callback) {
   restartBtn.addEventListener('click', callback);
 }
 
-export {
-  addRestartEvent,
-}
+export { addRestartEvent };

@@ -1,4 +1,4 @@
-import { Player, Computer } from "./player";
+import { Player, Computer } from './player';
 
 const PlayerManager = (() => {
   let _current;
@@ -23,17 +23,20 @@ const PlayerManager = (() => {
     return _current;
   }
 
-  function getPlayerName(player) { // Need for DOM classes
-    return (player instanceof Computer) ? 'computer' : 'player';
+  function getPlayerName(player) {
+    // Need for DOM classes
+    return player instanceof Computer ? 'computer' : 'player';
   }
 
   function getNotCurrent() {
-    return (_current === _players[0]) ? _players[1] : _players[0];
+    return _current === _players[0] ? _players[1] : _players[0];
   }
 
   function getPlayerPossibleAttacks(player) {
     // Finds the enemy player and gets the possible attacks from their gameboard
-    return _players.find(_player => _player !== player).gameboard.getPossibleAttacks();
+    return _players
+      .find((_player) => _player !== player)
+      .gameboard.getPossibleAttacks();
   }
 
   function getLastAttackAtEnemy() {
@@ -69,8 +72,8 @@ const PlayerManager = (() => {
     handleGameboardAttack,
     checkLastAttackAtEnemyHitShip,
     checkLastAttackAtEnemySankShip,
-    getLastAttackAtEnemy
-  }
+    getLastAttackAtEnemy,
+  };
 })();
 
 export default PlayerManager;

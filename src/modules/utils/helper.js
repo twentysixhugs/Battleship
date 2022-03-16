@@ -20,7 +20,7 @@ function getCellsSurroundingCell(cell) {
     [cell[0] - 1, cell[1] + 1],
     [cell[0], cell[1] + 1],
     [cell[0] + 1, cell[1] + 1],
-  ]
+  ];
 }
 
 function getPerpendicularCells(cell) {
@@ -54,17 +54,15 @@ function getPerpendicularCells(cell) {
 }
 
 function stringifyElements(arr) {
-  return arr.map(el => el.toString());
+  return arr.map((el) => el.toString());
 }
 
 function convertElementsToNumbers(arr) {
-  return arr.map(el => Number(el));
+  return arr.map((el) => Number(el));
 }
 
 function getCellsSurroundingShip(shipCoordinates) {
-  const cellsSurroundingShip = shipCoordinates
-    .map(getCellsSurroundingCell)
-    .flat()
+  const cellsSurroundingShip = shipCoordinates.map(getCellsSurroundingCell).flat();
 
   return cellsSurroundingShip;
 }

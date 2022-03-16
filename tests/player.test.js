@@ -25,7 +25,7 @@ describe('Computer player', () => {
     expect(computer.lastHitAtShip).toBeFalsy();
   });
 
-  test('Computer starts attacking a ship once it has hit one of ship\'s positions', () => {
+  test("Computer starts attacking a ship once it has hit one of ship's positions", () => {
     const player = new Player('1');
     const computer = new Computer();
 
