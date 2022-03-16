@@ -59,7 +59,7 @@ body {
   display: flex;
   flex-flow: column;
   align-items: center;
-  gap: 50px;
+  gap: 40px;
 
   font-family: 'Alegreya Sans SC', sans-serif, var(--system-font);
 }
@@ -354,4 +354,18 @@ button {
 
 .result__btn:hover {
   background: #2a089b;
+}
+
+/* || Footer */
+
+.footer {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.footer__link {
+  text-decoration: none;
+  color: #070f86;
 }
