@@ -1,4 +1,4 @@
-# Battleship
+# Battleship (Морской бой)
 
 **The live preview is available in GitHub Pages**
 
