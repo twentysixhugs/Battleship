@@ -86,10 +86,6 @@ function showShip(coordinates, player) {
   ship.dataset.length = coordinates.length;
 
   cell.appendChild(ship);
-
-  if (player === 'player') {
-    ship.setAttribute('draggable', 'true');
-  }
 }
 
 function setShipToSunk(coordinates, player) {
