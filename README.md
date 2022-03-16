@@ -1,6 +1,7 @@
 # Battleship (Морской бой)
+### [Live preview](https://twentysixhugs.github.io/Battleship/)
 
-**The live preview is available in GitHub Pages**
+---
 
 ## Key features
 - **The AI is not stupid, it will try to destroy your ship after hitting it**.
