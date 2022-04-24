@@ -65,10 +65,10 @@ button {
   display: none;
   grid-template-rows: var(--cell-size) calc(var(--cell-size) * 10) calc(
       var(--cell-size) * 2
-    ) calc(var(--cell-size) * 2);
-  grid-template-columns: var(--cell-size) calc(
-      var(--cell-size) * 10 * 3 / 5
-    ) 1fr;
+    );
+  grid-template-columns:
+    var(--cell-size) calc(var(--cell-size) * 10 * 3 / 5)
+    1fr;
 }
 
 .gameboard.is-visible {
@@ -217,6 +217,16 @@ button {
   align-items: start;
 
   padding: 1rem;
+}
+
+@media (max-width: 700px) {
+  body {
+    --cell-size: max(2.2vw, 25px);
+  }
+  .game {
+    flex-flow: column;
+    gap: 0;
+  }
 }
 
 .ship {
