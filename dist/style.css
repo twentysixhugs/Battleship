@@ -18,6 +18,7 @@ body {
   gap: 40px;
 
   font-family: 'Alegreya Sans SC', sans-serif, var(--system-font);
+  background: #fff7d8;
 }
 
 /* || Utils */
@@ -107,7 +108,7 @@ button {
 /* || Battlefield */
 
 .gameboard__battlefield {
-  --cell-border-color: rgb(144, 121, 199);
+  --cell-border-color: rgb(199, 172, 121);
   grid-row: 2 / -1;
   grid-column: 2 / -1;
 
@@ -170,12 +171,14 @@ button {
   font-size: calc(1rem + 2px);
 
   border-radius: 12px;
-  background: #250786;
+  background: #9b5b08;
   color: white;
+
+  transition: background 0.5s;
 }
 
 .gameboard__btn:hover {
-  background: #2a089b;
+  background: #a76309;
 }
 
 .gameboard__btn.is-visible {
@@ -235,13 +238,13 @@ button {
   left: -1px;
   z-index: 10;
 
-  border: 2px solid #470fff;
-  background: #e4d6ff6c;
+  border: 2px solid #bf5900;
+  background: #ffce725d;
 }
 
 .ship--sunk {
   border: 2px solid #ff0f0f;
-  background: #ffd6d66c;
+  background: #ffdbd66c;
 }
 
 .ship--4 {
@@ -300,7 +303,7 @@ button {
 
   border: 2px solid rgb(0, 0, 0);
   border-radius: 6px;
-  background: #fff;
+  background: #fff7d8;
 }
 
 .result__message {
@@ -317,12 +320,13 @@ button {
   font-size: calc(1rem + 6px);
 
   border-radius: 12px;
-  background: #250786;
+  background: #9b5b08;
   color: white;
+  transition: background 0.5s;
 }
 
 .result__btn:hover {
-  background: #2a089b;
+  background: #a76309;
 }
 
 /* || Footer */
@@ -336,5 +340,5 @@ button {
 
 .footer__link {
   text-decoration: none;
-  color: #070f86;
+  color: #9b5b08;
 }
