@@ -6,10 +6,9 @@
 
 ## Key features
 
-- **The AI algorithm is clever, it will try to destroy your ship after hitting it**.
+- **The AI is clever, it will try to destroy your ship after hitting it by attacking adjacent cells instead of the random ones.**
 - Ships can be generated and placed randomly.
-- Ship placement is validated.
-- Ships cannot be placed adjacent to one another.
+- Ship placement is validated, they cannot not be placed adjacent to each other.
 - Ship's surrounding is immediately attacked once the ship is sunk
 
 ## How to play?
