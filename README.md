@@ -6,7 +6,7 @@
 
 ## Key features
 
-- **The AI is clever, it will try to destroy your ship after hitting it**.
+- **The AI algorithm is clever, it will try to destroy your ship after hitting it**.
 - Ships can be generated and placed randomly.
 - Ship placement is validated.
 - Ships cannot be placed adjacent to one another.
