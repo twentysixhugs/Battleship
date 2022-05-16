@@ -10,6 +10,7 @@
 - Ships can be generated and placed randomly.
 - Ship placement is validated, they cannot not be placed adjacent to each other.
 - Ship's surrounding is immediately attacked once the ship is sunk
+- It was written with TDD approach
 
 ## How to play?
 
